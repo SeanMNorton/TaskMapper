@@ -18,6 +18,7 @@ var CountDown = React.createClass({
   getInitialState: function () {
     return {
       time: this.props.time ,
+      dueDate: this.props.dueDate,
       disabled: true
     }
   },
@@ -63,14 +64,13 @@ var CountDown = React.createClass({
     }
   },
 
-
   _countdown(){
     var timer = function () {
-      var time = this.state.time - 1
+       var time = parseInt((this.state.dueDate - Date.now())/ 1000)
       this.setState({time: time})
       if (time > 0) {
         this.setTimeout(timer, 1000)
-        if (time == 1 ){
+        if (time == 2 ){
           AlertIOS.alert(
                 "This alert happens at 1second and is in the counter.js!"
               )
@@ -82,7 +82,27 @@ var CountDown = React.createClass({
     };
     this.setTimeout(timer, 1000);
   }
-})
+  })
+
+//   _countdown(){
+//     var timer = function () {
+//       var time = this.state.time - 1
+//       this.setState({time: time})
+//       if (time > 0) {
+//         this.setTimeout(timer, 1000)
+//         if (time == 1 ){
+//           AlertIOS.alert(
+//                 "This alert happens at 1second and is in the counter.js!"
+//               )
+//         }
+//       } else {
+//         this.setState({disabled: false})
+//         this.setState({time: 0})
+//       }
+//     };
+//     this.setTimeout(timer, 1000);
+//   }
+// })
 
 var styles = StyleSheet.create({
   text: {

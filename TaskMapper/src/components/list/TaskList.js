@@ -10,6 +10,7 @@ var TaskItem = require('../task/TaskItem')
 var styles = require('../../styles/styles')
 
 class TaskList extends React.Component {
+
   componentWillMount() {
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
@@ -23,7 +24,6 @@ class TaskList extends React.Component {
         dataSource={dataSource}
         renderRow={(rowData, sectionID, rowID) =>
           <TaskItem item={rowData}
-            onPress={console.log(rowData)}
             onPress={() => this.props.onPressItem(rowData, rowID)}
             onLongPress={() => this.props.onLongPressItem(rowData, rowID)}
           />

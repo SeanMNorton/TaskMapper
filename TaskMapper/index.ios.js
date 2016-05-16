@@ -24,11 +24,12 @@ class TaskMapper extends React.Component {
           this.refs.nav.navigator.push({
             title: "List",
             component: ListContainer,
-            rightButtonTitle: 'Create',
-            onRightButtonPress: () => { this.refs.nav.navigator.push({
-              title: "Create Task",
-              component: EditTask,
-            }); }
+            // rightButtonTitle: 'Create',
+            // onRightButtonPress: () => { this.refs.nav.navigator.push({
+            //   title: "Create Task",
+            //   component: EditTask,
+            //   passProps: {item: {}, update: this.state.props.updateItem}
+            // }); }
           });}
         }}
       />

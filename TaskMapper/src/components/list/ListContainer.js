@@ -6,21 +6,37 @@ import {
   View,
   TouchableHighlight,
   AlertIOS,
+  NavigatorIOS,
+  AsyncStorage,
 } from 'react-native'
 
 var EditTask = require('../task/EditTask')
 var TaskList = require('./TaskList')
 var styles = require('../../styles/styles')
 
+// [
+//   {txt: 'Learn react native', desc:'woot!', complete: false },
+//   {txt: 'Make a to-do app', desc:'woot!', complete: true },
+// ]
 class ListContainer extends React.Component {
+  componentDidMount() {
+    // AsyncStorage.removeItem("items")
+    AsyncStorage.getItem("items")
+      .then( (itemsString) => {
+        if (itemsString) {
+          var itemsArray = JSON.parse(itemsString)
+          for (var i in itemsArray) {
+            var currentItem = itemsArray[i]
+            var due = currentItem.due
+            currentItem.due = new Date(due)
+          }
+          this.setState({items: itemsArray})
+        }
+      })
+  }
   constructor() {
     super()
-    this.state = {
-      items: [
-        {txt: 'Learn react native', desc:'woot!', complete: false },
-        {txt: 'Make a to-do app', desc:'woot!', complete: true },
-      ]
-    }
+    this.state = {items: []}
     this.alertMenu = this.alertMenu.bind(this)
     this.deleteItem = this.deleteItem.bind(this)
     this.updateItem = this.updateItem.bind(this)
@@ -50,6 +66,8 @@ class ListContainer extends React.Component {
       items.push(item)
     }
     this.setState({items: items})
+    AsyncStorage.setItem("items", JSON.stringify(this.state.items))
+
     this.props.navigator.pop()
   }
   openItem(rowData, rowID) {
@@ -61,6 +79,7 @@ class ListContainer extends React.Component {
   }
  render() {
     return (
+
       <View style={{flex:1}}>
         <TaskList
           items={this.state.items}
