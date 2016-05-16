@@ -14,6 +14,7 @@ var t = require('tcomb-form-native')
 var Task = t.struct({txt: t.Str, desc: t.Str, complete: t.Bool, due: t.Date})
 var Form = t.form.Form
 var styles = require('../../styles/styles')
+var GoogleSearch = require('../search/GoogleSearch');
 var options = {
   fields: {
     txt: {
@@ -50,7 +51,11 @@ class TaskEdit extends React.Component {
           type={Task}
           onChange={this._onChange}
           options={options}
-          value={this.props.item}/>
+          value={this.props.item}
+        />
+        <View>
+          <GoogleSearch styles={{height: 10}}/>
+        </View>
         <TouchableHighlight
           style={[styles.button, styles.saveButton]}
           onPress={this.onUpdate}

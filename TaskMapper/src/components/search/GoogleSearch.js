@@ -11,7 +11,8 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  AsyncStorage,
 } from 'react-native';
 
 const homePlace = {description: 'Home', geometry: { location: { lat: 48.8152937, lng: 2.4597668 } }};
@@ -22,13 +23,15 @@ class GoogleSearch extends Component {
     return (
       <GooglePlacesAutocomplete
         placeholder='Search'
-        minLength={2} // minimum length of text to search
+        // minLength={2} // minimum length of text to search
         autoFocus={false}
         fetchDetails={true}
         onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-          console.log(details.geometry.location);
+          currentSearch = JSON.stringify({lat: details.geometry.location.lat, lng: details.geometry.location.lng, name: details.name})
+          console.log(currentSearch);
+          AsyncStorage.setItem("currentSearch", currentSearch)
         }}
-        // 
+        //
         // module.exports = function() {
         //   return details.geometry.location;
         //   console.log("This");

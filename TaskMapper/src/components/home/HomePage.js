@@ -15,18 +15,8 @@ var UltimateMap = require('../map/UltimateMap');
 class HomePage extends React.Component {
   render() {
     return (
-      <View
-        style={styles.container}
-      >
-        <UltimateMap
-          style={styles.map}
-        >
-        </UltimateMap>
-        <GoogleSearch
-          style={styles.search}
-        >
-        </GoogleSearch>
-
+      <View style={styles.container}>
+        <UltimateMap />
       </View>
     )
   }
@@ -35,14 +25,6 @@ class HomePage extends React.Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  search: {
-    flex: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  map: {
-    flex: 3,
   },
 })
 
