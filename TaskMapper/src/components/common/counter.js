@@ -31,16 +31,15 @@ var CountDown = React.createClass({
           <View
               style={[styles.wrapper,this.props.buttonStyle]}
               >
-            <TouchableWithoutFeedback
-                >
+
               <Text style={[style]}>{this.props.text}({this.state.time})</Text>
-            </TouchableWithoutFeedback>
+
           </View>
     } else {
       component =
           <TouchableHighlight
               style={[styles.wrapper,this.props.buttonStyle]}
-              onPress={this._onPress.bind(this)}
+              onPress={this._onPress}
               >
             <Text style={[style,this.props.textStyle]}>{this.props.text}({this.state.time})</Text>
           </TouchableHighlight>
@@ -78,7 +77,7 @@ var CountDown = React.createClass({
         this.setState({time: 0});
       }
     };
-    this.setTimeout(timer.bind(this), 1000);
+    this.setTimeout(timer, 1000);
   }
 });
 

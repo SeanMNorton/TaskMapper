@@ -2,7 +2,7 @@
 var styles = require('../../styles/styles')
 var React = require('react-native');
 var CountDown = require('../common/counter');
-var moment = require('moment');
+
 
 var { Text, View, TouchableHighlight, StyleSheet, AlertIOS } = React;
 
@@ -14,7 +14,7 @@ class TaskItem extends React.Component {
     var now = Date.now()
     var diffDays = parseInt((dueDate - now)/ 1000)
 
-  
+
 
     return (
       <View>
@@ -26,6 +26,7 @@ class TaskItem extends React.Component {
               style={[styles.txt, item.complete && styles.completed]}>
               {item.txt}
               </Text>
+              <View>
               <CountDown
                 onPress={this.sendAgain}
                 text={'Due In:'}
@@ -34,6 +35,7 @@ class TaskItem extends React.Component {
                 textStyle={{color:'black'}}
                 disabledTextStyle={{color:'gray'}}
               />
+              </View>
           </View>
         </TouchableHighlight>
         <View style={styles.hr}/>
