@@ -10,6 +10,7 @@
     "react": "^0.14.8",
     "react-count-down": "^1.0.1",
     "react-native": "^0.25.1",
-    "react-native-countdown": "0.0.3"
+    "react-native-countdown": "0.0.3",
+    "tcomb-form-native": "^0.4.4"
   }
 }

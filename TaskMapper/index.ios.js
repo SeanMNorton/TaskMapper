@@ -1,23 +1,39 @@
+'use strict'
+import React, { Component } from 'react'
+import {
+  AppRegistry,
+  NavigatorIOS,
+  StyleSheet,
+} from 'react-native'
 
-'use strict';
-
+var UltimateMap = require('./src/components/map/UltimateMap');
 var ListContainer = require('./src/components/list/ListContainer');
+var EditTask = require('./src/components/task/EditTask');
 
-
-var React = require('react-native');
-var { AppRegistry, MapView, NavigatorIOS, StyleSheet } = React;
-
-var TaskMapper = React.createClass({
+class TaskMapper extends React.Component {
   render() {
-        return (
-
-            <NavigatorIOS
-                style={styles.navigator}
-                initialRoute={{component: ListContainer, title: 'Task Mapper'}}/>
-
-        );
-    }
-});
+    return (
+      <NavigatorIOS ref = 'nav'
+        style={styles.navigator}
+        initialRoute={{
+          component: UltimateMap,
+          title: 'Task Mapper',
+          rightButtonTitle: 'Task List',
+          onRightButtonPress: () => {
+          this.refs.nav.navigator.push({
+            title: "List",
+            component: ListContainer,
+            rightButtonTitle: 'Create',
+            onRightButtonPress: () => { this.refs.nav.navigator.push({
+              title: "Create Task",
+              component: EditTask,
+            }); }
+          });}
+        }}
+      />
+    )
+  }
+}
 
 var styles = StyleSheet.create({
   navigator: {
@@ -25,4 +41,4 @@ var styles = StyleSheet.create({
   }
 })
 
-AppRegistry.registerComponent('TaskMapper', () => TaskMapper);
+AppRegistry.registerComponent('TaskMapper', () => TaskMapper)
