@@ -44,13 +44,43 @@ var UltimateMap = React.createClass({
     markers: [],
     };
   },
+  componentDidMount() {
 
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          var initialPosition = {
+            long: parseFloat(position.coords.longitude),
+            lat: parseFloat(position.coords.latitude)
+          }
+          this.setState({
+            initialPosition
+          })
+        },
+        (error) => alert(error.message),
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 5000}
+      );
+      this.watchID = navigator.geolocation.watchPosition((position) => {
+        var lastPosition = {
+          long: parseFloat(position.coords.longitude),
+          lat: parseFloat(position.coords.latitude)
+        }
+        this.setState({
+          lastPosition
+        });
+      });
+    },
+
+    componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchID);
+  },
   render: function() {
     return (
       <MapView style={{flex: 2}}
         annotations={[...this.state.markers]}
         overlays={this.overlays(this.state.markers)}
         region={this.state.region}
+        showsUserLocation={true}
       />
     )
   },
