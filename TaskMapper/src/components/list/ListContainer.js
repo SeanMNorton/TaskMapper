@@ -59,16 +59,23 @@ class ListContainer extends React.Component {
     this.setState({items: items})
   }
   updateItem(item, index) {
-    var items = this.state.items
-    if (index) {
-      items[index] = item
-    } else {
-      items.push(item)
-    }
-    this.setState({items: items})
-    AsyncStorage.setItem("items", JSON.stringify(this.state.items))
+    AsyncStorage.getItem("currentSearch")
+      .then( (searchString) => {
+        var searchObject = JSON.parse(searchString)
+        item.location = searchObject.location
+        item.name = searchObject.name
+      })
 
-    this.props.navigator.pop()
+        var items = this.state.items
+        if (index) {
+          items[index] = item
+        } else {
+          items.push(item)
+        }
+        this.setState({items: items})
+        AsyncStorage.setItem("items", JSON.stringify(this.state.items))
+
+        this.props.navigator.pop()
   }
   openItem(rowData, rowID) {
     this.props.navigator.push({

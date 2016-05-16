@@ -4,6 +4,11 @@ import {
   MapView,
 } from 'react-native'
 
+const LATITUDE = 41.889357;
+const LONGITUDE = -87.637604;
+const LATITUDE_DELTA = 0.0922;
+const LONGITUDE_DELTA = 1.2;
+
 function circleOverlay(marker) {
   var cLat = marker.latitude
   var cLong = marker.longitude
@@ -30,15 +35,22 @@ function circleOverlay(marker) {
 var UltimateMap = React.createClass({
   getInitialState: function() {
     return {
+      region: {
+        latitude: LATITUDE,
+        longitude: LONGITUDE,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA,
+      },
     markers: [],
     };
   },
 
   render: function() {
     return (
-      <MapView style={{flex: 1}}
+      <MapView style={{flex: 2}}
         annotations={[...this.state.markers]}
         overlays={this.overlays(this.state.markers)}
+        region={this.state.region}
       />
     )
   },
@@ -72,6 +84,8 @@ var UltimateMap = React.createClass({
         id: marker.id,
         latitude: marker.latitude,
         longitude: marker.longitude,
+        latitudeDelta: marker.latitudeDelta,
+        longitudeDelta: marker.longitudeDelta,
         draggable: true,
         onDragStateChange: this.onDragStateChange,
         tintColor: marker.color,
