@@ -27,8 +27,7 @@ class GoogleSearch extends Component {
         autoFocus={false}
         fetchDetails={true}
         onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-          currentSearch = JSON.stringify({lat: details.geometry.location.lat, lng: details.geometry.location.lng, name: details.name})
-          console.log(currentSearch);
+          currentSearch = JSON.stringify({location: details.geometry.location, name: details.name})
           AsyncStorage.setItem("currentSearch", currentSearch)
         }}
         //

@@ -51,6 +51,9 @@ class TaskEdit extends React.Component {
           options={options}
           value={this.props.item}
         />
+        <Text>
+          {this.state}
+        </Text>
         <View>
           <GoogleSearch styles={{height: 10}}/>
         </View>
