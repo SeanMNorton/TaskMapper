@@ -6,8 +6,8 @@ import {
   Text,
   ListView
 } from 'react-native';
-var styles = require('../../styles/styles')
-var TaskItem = require('../task/TaskItem')
+var styles = require('../../styles/styles');
+var TaskItem = require('../task/TaskItem');
 
 class TaskList extends React.Component {
 

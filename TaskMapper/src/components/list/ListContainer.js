@@ -13,13 +13,13 @@ var TaskList = require('./TaskList');
 
 
 class ListContainer extends React.Component {
-  
+
     constructor() {
         super();
         this.state = {
             items: [
-                {txt: 'Learn react native', desc:'woot!', complete: false, due: new Date('2016, 11, 17') },
-                {txt: 'Make a to-do app', desc:'woot!', complete: true, due: new Date('2016, 11, 17')},
+                {txt: 'Learn react native', desc:'woot!', complete: false, due: 1 },
+                {txt: 'Make a to-do app', desc:'woot!', complete: true, due: 1 },
             ]
         };
         this.alertMenu = this.alertMenu.bind(this);
