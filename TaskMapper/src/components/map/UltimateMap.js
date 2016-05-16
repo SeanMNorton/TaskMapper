@@ -8,6 +8,7 @@ function circleOverlay(marker) {
   var cLat = marker.latitude
   var cLong = marker.longitude
   var rInMeters = marker.radius
+  var setPinFromSearch = ('../search/GoogleSearch');
 
   var coords = []
   var tau = 2*Math.PI
@@ -29,32 +30,30 @@ function circleOverlay(marker) {
 var UltimateMap = React.createClass({
   getInitialState: function() {
     return {
-      markers: [
-          {
-          id: '1',
-          latitude: 41.889700,
-          longitude: -87.637526,
-          radius: 100,
-          color: '#f00',
-        },
-        {
-          id: '2',
-          latitude: 41.889700,
-          longitude: -87.6,
-          radius: 300,
-          color: '#0f0',
-        },
-      ]
-    }
+    markers: [],
+    };
   },
+
   render: function() {
     return (
       <MapView style={{flex: 1}}
-        annotations={this.annotations(this.state.markers)}
+        annotations={[...this.state.markers]}
         overlays={this.overlays(this.state.markers)}
       />
     )
   },
+
+  setPinFromSearch: function(location) {
+    this.setState({
+      pin: {
+        longitude: this.lng,
+        latitude: this.lat,
+      }
+    })
+    this.state.markers.push(this.state.pin);
+    console.log(this.state.markers);
+  },
+
   onDragStateChange: function(event) {
     if (event.state === 'ending') {
       var newMarkers = this.state.markers.map(function(marker) {
