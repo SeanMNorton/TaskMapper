@@ -18,8 +18,8 @@ class ListContainer extends React.Component {
         super();
         this.state = {
             items: [
-                {txt: 'Learn react native', desc:'woot!', complete: false, due: 1 },
-                {txt: 'Make a to-do app', desc:'woot!', complete: true, due: 1 },
+                {txt: 'Learn react native', desc:'woot!', complete: false },
+                {txt: 'Make a to-do app', desc:'woot!', complete: true },
             ]
         };
         this.alertMenu = this.alertMenu.bind(this);

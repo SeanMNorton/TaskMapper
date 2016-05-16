@@ -14,7 +14,7 @@ var CountDown = React.createClass({
   mixins: [TimerMixin],
   getInitialState: function () {
     return {
-      time: this.props.time ? this.props.time : 60,
+      time: this.props.time ,
       disabled: true
     };
   },
