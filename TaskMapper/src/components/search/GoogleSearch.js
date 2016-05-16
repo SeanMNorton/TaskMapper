@@ -4,6 +4,7 @@
  * @flow
  */
 var {GooglePlacesAutocomplete} = require('react-native-google-places-autocomplete');
+var UltimateMap = require('../map/UltimateMap');
 
 import React, { Component } from 'react';
 import {
@@ -25,9 +26,14 @@ class GoogleSearch extends Component {
         autoFocus={false}
         fetchDetails={true}
         onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
-          console.log(data);
-          console.log(details);
+          console.log(details.geometry.location);
         }}
+        // 
+        // module.exports = function() {
+        //   return details.geometry.location;
+        //   console.log("This");
+        // }
+
         getDefaultValue={() => {
           return ''; // text input default value
         }}
