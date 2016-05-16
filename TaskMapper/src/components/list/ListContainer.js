@@ -62,8 +62,13 @@ class ListContainer extends React.Component {
     AsyncStorage.getItem("currentSearch")
       .then( (searchString) => {
         var searchObject = JSON.parse(searchString)
-        item.location = searchObject.location
-        item.name = searchObject.name
+        var newItem = {}
+        for (var property in item) {
+          newItem[property] = item[property]
+        }
+        newItem.location = searchObject.location
+        newItem.name = searchObject.name
+        item = newItem
       })
 
         var items = this.state.items
@@ -74,7 +79,6 @@ class ListContainer extends React.Component {
         }
         this.setState({items: items})
         AsyncStorage.setItem("items", JSON.stringify(this.state.items))
-
         this.props.navigator.pop()
   }
   openItem(rowData, rowID) {
@@ -86,7 +90,6 @@ class ListContainer extends React.Component {
   }
  render() {
     return (
-
       <View style={{flex:1}}>
         <TaskList
           items={this.state.items}
