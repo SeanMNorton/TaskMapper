@@ -23,7 +23,7 @@ class GoogleSearch extends Component {
     return (
       <GooglePlacesAutocomplete
         placeholder='Search'
-        // minLength={2} // minimum length of text to search
+        minLength={2} // minimum length of text to search
         autoFocus={false}
         fetchDetails={true}
         onPress={(data, details = null) => { // 'details' is provided when fetchDetails = true
