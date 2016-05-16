@@ -6,6 +6,7 @@ import {
   Text,
   TextInput,
   View,
+  AsyncStorage,
 } from 'react-native'
 
 var t = require('tcomb-form-native')
@@ -34,10 +35,11 @@ class TaskEdit extends React.Component {
 
   onUpdate() {
     var value = this.refs.form.getValue()
-    console.log(value)
     if (value) {
       this.props.update(value, this.props.id)
     }
+    // This is the start to AsyncStorage.
+    // AsyncStorage.setItem("item", JSON.stringify(value));
   }
 
   render() {

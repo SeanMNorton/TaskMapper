@@ -6,11 +6,13 @@ import {
   View,
   TouchableHighlight,
   AlertIOS,
+  NavigatorIOS,
 } from 'react-native'
 
 var EditTask = require('../task/EditTask')
 var TaskList = require('./TaskList')
 var styles = require('../../styles/styles')
+
 
 class ListContainer extends React.Component {
   constructor() {
@@ -61,6 +63,7 @@ class ListContainer extends React.Component {
   }
  render() {
     return (
+
       <View style={{flex:1}}>
         <TaskList
           items={this.state.items}
