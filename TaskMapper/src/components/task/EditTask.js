@@ -38,8 +38,8 @@ class TaskEdit extends React.Component {
     if (value) {
       this.props.update(value, this.props.id)
     }
-    // This is the start to AsyncStorage.
-    // AsyncStorage.setItem("item", JSON.stringify(value));
+    AsyncStorage.setItem("myKey", JSON.stringify(value));
+    console.log(AsyncStorage.getItem('myKey'))
   }
 
   render() {

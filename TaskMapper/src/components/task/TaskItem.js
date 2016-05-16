@@ -34,6 +34,7 @@ class TaskItem extends React.Component {
                 onPress={this.sendAgain}
                 text={'Due In:'}
                 time={diffDays}
+                dueDate={dueDate}
                 buttonStyle={{padding:20}}
                 textStyle={{color:'black'}}
                 disabledTextStyle={{color:'gray'}}

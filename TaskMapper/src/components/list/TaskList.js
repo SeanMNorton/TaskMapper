@@ -10,6 +10,7 @@ var TaskItem = require('../task/TaskItem')
 var styles = require('../../styles/styles')
 
 class TaskList extends React.Component {
+  
   componentWillMount() {
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (row1, row2) => row1 !== row2
