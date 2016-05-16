@@ -2,19 +2,18 @@
 import React, { Component } from 'react'
 import {
   AppRegistry,
-  MapView,
   NavigatorIOS,
   StyleSheet,
 } from 'react-native'
 
-var ListContainer = require('./src/components/list/ListContainer')
+var UltimateMap = require('./src/components/map/UltimateMap')
 
 class TaskMapper extends React.Component {
   render() {
     return (
       <NavigatorIOS
         style={styles.navigator}
-        initialRoute={{component: ListContainer, title: 'Task Mapper'}}
+        initialRoute={{component: UltimateMap, title: 'Task Mapper'}}
       />
     )
   }
