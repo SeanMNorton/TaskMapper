@@ -1,4 +1,6 @@
-import React, {
+'use strict'
+import React, { Component } from 'react'
+import {
     Image,
     Text,
     AlertIOS,
@@ -6,9 +8,10 @@ import React, {
     StyleSheet,
     TextInput,
     TouchableHighlight,
-    TouchableWithoutFeedback
-} from 'react-native';
-var TimerMixin = require('react-timer-mixin');
+    TouchableWithoutFeedback,
+} from 'react-native'
+
+var TimerMixin = require('react-timer-mixin')
 
 var CountDown = React.createClass({
   mixins: [TimerMixin],
@@ -16,17 +19,17 @@ var CountDown = React.createClass({
     return {
       time: this.props.time ,
       disabled: true
-    };
+    }
   },
   componentDidMount(){
-    this._countdown();
+    this._countdown()
   },
   render(){
-    var style = [styles.text];
-    var component;
+    var style = [styles.text]
+    var component
     if (this.state.disabled) {
-      style.push({color: 'gray'});
-      style.push(this.props.disabledTextStyle);
+      style.push({color: 'gray'})
+      style.push(this.props.disabledTextStyle)
       component =
           <View
               style={[styles.wrapper,this.props.buttonStyle]}
@@ -53,10 +56,10 @@ var CountDown = React.createClass({
     if (this.state.disabled) {
       //nothing
     } else {
-      this.setState({disabled: true});
-      this._countdown();
+      this.setState({disabled: true})
+      this._countdown()
       if(this.props.onPress){
-          this.props.onPress();
+          this.props.onPress()
       }
     }
   },
@@ -64,23 +67,23 @@ var CountDown = React.createClass({
 
   _countdown(){
     var timer = function () {
-      var time = this.state.time - 1;
-      this.setState({time: time});
+      var time = this.state.time - 1
+      this.setState({time: time})
       if (time > 0) {
-        this.setTimeout(timer, 1000);
+        this.setTimeout(timer, 1000)
         if (time == 1 ){
           AlertIOS.alert(
                 "This alert happens at 1second and is in the counter.js!"
               )
         }
       } else {
-        this.setState({disabled: false});
-        this.setState({time: 0});
+        this.setState({disabled: false})
+        this.setState({time: 0})
       }
-    };
-    this.setTimeout(timer.bind(this), 1000);
+    }
+    this.setTimeout(timer.bind(this), 1000)
   }
-});
+})
 
 var styles = StyleSheet.create({
   text: {
@@ -91,6 +94,6 @@ var styles = StyleSheet.create({
     marginRight:10,
     backgroundColor: '#e5e5e5',
   }
-});
+})
 
-module.exports = CountDown;
+module.exports = CountDown

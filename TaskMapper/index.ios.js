@@ -1,23 +1,23 @@
+'use strict'
+import React, { Component } from 'react'
+import {
+  AppRegistry,
+  NavigatorIOS,
+  StyleSheet,
+} from 'react-native'
 
-'use strict';
+var UltimateMap = require('./src/components/map/UltimateMap')
 
-var ListContainer = require('./src/components/list/ListContainer');
-
-
-var React = require('react-native');
-var { AppRegistry, MapView, NavigatorIOS, StyleSheet } = React;
-
-var TaskMapper = React.createClass({
+class TaskMapper extends React.Component {
   render() {
-        return (
-
-            <NavigatorIOS
-                style={styles.navigator}
-                initialRoute={{component: ListContainer, title: 'Task Mapper'}}/>
-
-        );
-    }
-});
+    return (
+      <NavigatorIOS
+        style={styles.navigator}
+        initialRoute={{component: UltimateMap, title: 'Task Mapper'}}
+      />
+    )
+  }
+}
 
 var styles = StyleSheet.create({
   navigator: {
@@ -25,4 +25,4 @@ var styles = StyleSheet.create({
   }
 })
 
-AppRegistry.registerComponent('TaskMapper', () => TaskMapper);
+AppRegistry.registerComponent('TaskMapper', () => TaskMapper)

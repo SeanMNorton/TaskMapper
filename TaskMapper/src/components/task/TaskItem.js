@@ -1,21 +1,23 @@
-'use strict';
-var styles = require('../../styles/styles')
-var React = require('react-native');
-var CountDown = require('../common/counter');
-var moment = require('moment');
+'use strict'
+import React, { Component } from 'react'
+import {
+  Text,
+  View,
+  TouchableHighlight,
+  StyleSheet,
+  AlertIOS,
+} from 'react-native'
 
-var { Text, View, TouchableHighlight, StyleSheet, AlertIOS } = React;
+var ReactNative = require('react-native')
+var CountDown = require('../common/counter')
+var styles = require('../../styles/styles')
 
 class TaskItem extends React.Component {
   render() {
-
     var item = this.props.item
     var dueDate = this.props.item.due
     var now = Date.now()
     var diffDays = parseInt((dueDate - now)/ 1000)
-
-  
-
     return (
       <View>
         <TouchableHighlight
@@ -25,15 +27,15 @@ class TaskItem extends React.Component {
             <Text
               style={[styles.txt, item.complete && styles.completed]}>
               {item.txt}
-              </Text>
-              <CountDown
-                onPress={this.sendAgain}
-                text={'Due In:'}
-                time={diffDays}
-                buttonStyle={{padding:20}}
-                textStyle={{color:'black'}}
-                disabledTextStyle={{color:'gray'}}
-              />
+            </Text>
+            <CountDown
+              onPress={this.sendAgain}
+              text={'Due In:'}
+              time={diffDays}
+              buttonStyle={{padding:20}}
+              textStyle={{color:'black'}}
+              disabledTextStyle={{color:'gray'}}
+            />
           </View>
         </TouchableHighlight>
         <View style={styles.hr}/>
@@ -42,20 +44,18 @@ class TaskItem extends React.Component {
   }
 }
 
-module.exports = TaskItem
-
-// class TaskItem extends React.Component {
+// class TaskItem extends ReactNative.Component {
 //
 //   constructor() {
-//     super();
+//     super()
 //     this.state = {
 //       item: '',
 //       dueDate: '',
 //       now: Date.now(),
 //       diffDays: 0,
 //       Counter: <Text>'this'</Text>,
-//     };
-//   };
+//     }
+//   }
 //
 // componentWillMount(){
 //   this.setState({item: this.props.item}),
@@ -75,20 +75,20 @@ module.exports = TaskItem
 //     AlertIOS.alert(
 //       'Hey it is due'
 //     )
-//   };
+//   }
 //
 //   if (this.state.dueDate === null || this.state.item.complete === true) {
 //     this.setState({Counter: <Text>Always due</Text>})
 //   }
-// };
+// }
 //
 //
 //     render() {
-//         // var item = this.props.item;
-//         // var dueDate = this.props.item.due;
-//         // var now = Date.now();
-//         var diffDays = parseInt((this.state.dueDate - this.state.now)/ 1000);
-//         // var Counter;
+//         // var item = this.props.item
+//         // var dueDate = this.props.item.due
+//         // var now = Date.now()
+//         var diffDays = parseInt((this.state.dueDate - this.state.now)/ 1000)
+//         // var Counter
 //
 //         return (
 //             <View>
@@ -107,11 +107,12 @@ module.exports = TaskItem
 //
 //                 <View style={styles.hr}/>
 //             </View>
-//         );
+//         )
 //     }
 //
 //
 //
 //
 // }
-// module.exports = TaskItem;
+
+module.exports = TaskItem
