@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
   AsyncStorage,
+  ScrollView,
 } from 'react-native'
 
 var t = require('tcomb-form-native')
@@ -43,6 +44,7 @@ class TaskEdit extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+      <ScrollView>
         <Form
           ref="form"
           type={Task}
@@ -55,6 +57,7 @@ class TaskEdit extends React.Component {
           underlayColor='#99d9f4'>
           <Text style={styles.buttonText}>Save</Text>
         </TouchableHighlight>
+      </ScrollView>
       </View>
     )
   }
