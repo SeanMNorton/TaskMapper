@@ -1,3 +1,4 @@
+
 'use strict'
 import React, { Component } from 'react'
 import {
@@ -8,7 +9,6 @@ import {
   AlertIOS,
 } from 'react-native'
 
-var ReactNative = require('react-native')
 var CountDown = require('../common/counter')
 var styles = require('../../styles/styles')
 
@@ -18,6 +18,7 @@ class TaskItem extends React.Component {
     var dueDate = this.props.item.due
     var now = Date.now()
     var diffDays = parseInt((dueDate - now)/ 1000)
+
     return (
       <View>
         <TouchableHighlight
@@ -27,15 +28,17 @@ class TaskItem extends React.Component {
             <Text
               style={[styles.txt, item.complete && styles.completed]}>
               {item.txt}
-            </Text>
-            <CountDown
-              onPress={this.sendAgain}
-              text={'Due In:'}
-              time={diffDays}
-              buttonStyle={{padding:20}}
-              textStyle={{color:'black'}}
-              disabledTextStyle={{color:'gray'}}
-            />
+              </Text>
+              <View>
+              <CountDown
+                onPress={this.sendAgain}
+                text={'Due In:'}
+                time={diffDays}
+                buttonStyle={{padding:20}}
+                textStyle={{color:'black'}}
+                disabledTextStyle={{color:'gray'}}
+              />
+              </View>
           </View>
         </TouchableHighlight>
         <View style={styles.hr}/>

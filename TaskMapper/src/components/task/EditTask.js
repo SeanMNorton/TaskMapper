@@ -32,9 +32,6 @@ class TaskEdit extends React.Component {
     this.onUpdate = this.onUpdate.bind(this)
   }
 
-  onDateChange() {
-  }
-
   onUpdate() {
     var value = this.refs.form.getValue()
     console.log(value)

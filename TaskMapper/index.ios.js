@@ -6,14 +6,30 @@ import {
   StyleSheet,
 } from 'react-native'
 
-var UltimateMap = require('./src/components/map/UltimateMap')
+var UltimateMap = require('./src/components/map/UltimateMap');
+var ListContainer = require('./src/components/list/ListContainer');
+var EditTask = require('./src/components/task/EditTask');
 
 class TaskMapper extends React.Component {
   render() {
     return (
-      <NavigatorIOS
+      <NavigatorIOS ref = 'nav'
         style={styles.navigator}
-        initialRoute={{component: UltimateMap, title: 'Task Mapper'}}
+        initialRoute={{
+          component: UltimateMap,
+          title: 'Task Mapper',
+          rightButtonTitle: 'Task List',
+          onRightButtonPress: () => {
+          this.refs.nav.navigator.push({
+            title: "List",
+            component: ListContainer,
+            rightButtonTitle: 'Create',
+            onRightButtonPress: () => { this.refs.nav.navigator.push({
+              title: "Create Task",
+              component: EditTask,
+            }); }
+          });}
+        }}
       />
     )
   }
