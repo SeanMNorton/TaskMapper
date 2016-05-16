@@ -9,6 +9,7 @@ import {
 var UltimateMap = require('./src/components/map/UltimateMap');
 var ListContainer = require('./src/components/list/ListContainer');
 var EditTask = require('./src/components/task/EditTask');
+var HomePage = require('./src/components/home/HomePage');
 
 class TaskMapper extends React.Component {
   render() {
@@ -16,7 +17,7 @@ class TaskMapper extends React.Component {
       <NavigatorIOS ref = 'nav'
         style={styles.navigator}
         initialRoute={{
-          component: UltimateMap,
+          component: HomePage,
           title: 'Task Mapper',
           rightButtonTitle: 'Task List',
           onRightButtonPress: () => {
