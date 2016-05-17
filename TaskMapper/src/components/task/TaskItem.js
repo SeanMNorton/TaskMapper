@@ -20,26 +20,17 @@ class TaskItem extends React.Component {
     var diffDays = parseInt((dueDate - now)/ 1000)
 
     return (
-      <View>
+      <View
+      style={{marginTop: 2,textAlign: 'left',}}
+      >
         <TouchableHighlight
+          underlayColor={'#1FBBFF'}
           onPress={this.props.onPress}
           onLongPress={this.props.onLongPress}>
-          <View style={styles.container}>
-            <Text
-              style={[styles.txt, item.complete && styles.completed]}>
+          <View style={[styles.listItem, {justifyContent: 'flex-start'}]}>
+            <Text style={[styles.txt, item.complete && styles.completed]}>
               {item.txt}
-              </Text>
-              <View>
-              <CountDown
-                onPress={this.sendAgain}
-                text={'Due In:'}
-                time={diffDays}
-                dueDate={dueDate}
-                buttonStyle={{padding:20}}
-                textStyle={{color:'black'}}
-                disabledTextStyle={{color:'gray'}}
-              />
-              </View>
+            </Text>
           </View>
         </TouchableHighlight>
         <View style={styles.hr}/>
@@ -47,6 +38,19 @@ class TaskItem extends React.Component {
     )
   }
 }
+
+// Counter in seconds
+// <View>
+// <CountDown
+//   onPress={this.sendAgain}
+//   text={'Due In:'}
+//   time={diffDays}
+//   dueDate={dueDate}
+//   buttonStyle={{padding:20}}
+//   textStyle={{color:'black'}}
+//   disabledTextStyle={{color:'gray'}}
+// />
+// </View>
 
 // class TaskItem extends ReactNative.Component {
 //

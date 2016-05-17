@@ -16,6 +16,9 @@ class TaskMapper extends React.Component {
     return (
       <NavigatorIOS ref = 'nav'
         style={styles.navigator}
+        barTintColor="#1E3A47"
+        titleTextColor='#fff'
+        tintColor='#1FBBFF'
         initialRoute={{
           component: HomePage,
           title: 'Task Mapper',
@@ -40,6 +43,7 @@ class TaskMapper extends React.Component {
 var styles = StyleSheet.create({
   navigator: {
     flex: 1,
+
   }
 })
 
