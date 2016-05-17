@@ -20,7 +20,7 @@ function circleOverlay(marker) {
   var rLat = rInMeters/111111.1
   var rLong = rInMeters/(111111.1 * Math.cos(cLat*tau/360))
   var n = 100 // roundness of circle
-  for (var i = 0 i <= n i++) {
+  for (var i = 0; i <= n; i++) {
     var lat = cLat + rLat * Math.cos(tau*i/n)
     var long = cLong + rLong * Math.sin(tau*i/n)
     coords.push({latitude: lat, longitude: long})
@@ -44,36 +44,55 @@ var UltimateMap = React.createClass({
     markers: [],
     }
   },
-  componentDidMount() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        var initialPosition = {
-          long: parseFloat(position.coords.longitude),
-          lat: parseFloat(position.coords.latitude)
-        }
-        this.setState({
-          initialPosition
-        })
-      },
-      (error) => alert(error.message),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 5000}
-    )
-    this.watchID = navigator.geolocation.watchPosition((position) => {
-      var lastPosition = {
-        long: parseFloat(position.coords.longitude),
-        lat: parseFloat(position.coords.latitude)
-      }
-      this.setState({
-        lastPosition
-      })
-    })
-  },
-  componentWillUnmount() {
-    navigator.geolocation.clearWatch(this.watchID)
-  },
+  // componentDidMount() {
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       var initialPosition = {
+  //         long: parseFloat(position.coords.longitude),
+  //         lat: parseFloat(position.coords.latitude)
+  //       }
+  //       this.setState({
+  //         initialPosition
+  //       })
+  //     },
+  //     (error) => alert(error.message),
+  //     {enableHighAccuracy: true, timeout: 20000, maximumAge: 5000}
+  //   )
+  //   this.watchID = navigator.geolocation.watchPosition((position) => {
+  //     var lastPosition = {
+  //       long: parseFloat(position.coords.longitude),
+  //       lat: parseFloat(position.coords.latitude)
+  //     }
+  //     this.setState({
+  //       lastPosition
+  //     })
+  //   })
+  // },
+  // componentWillUnmount() {
+  //   navigator.geolocation.clearWatch(this.watchID)
+  // },
   render: function() {
+    console.log("dog")
+    // AsyncStorage.removeItem("items")
+    // AsyncStorage.removeItem("currentSearch")
+    AsyncStorage.getItem("items")
+      .then( (itemsString) => {
+        if (itemsString) {
+          var itemsArray = JSON.parse(itemsString)
+          var markers = itemsArray.map((item, index) => {
+            return {
+                id: index.toString(),
+                latitude: item.location.lat,
+                longitude: item.location.lng,
+                radius: 100,
+                color: '#f00',
+              }
+            })
+            this.setState({markers: markers})
+        }
+      })
     return (
-      <MapView style={{flex: 2}}
+      <MapView style={{flex: 1}}
         annotations={this.annotations(this.state.markers)}
         overlays={this.overlays(this.state.markers)}
         region={this.state.region}
