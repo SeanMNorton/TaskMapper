@@ -70,8 +70,7 @@ class GoogleSearch extends Component {
         filterReverseGeocodingByTypes={['locality', 'administrative_area_level_3']} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
 
         predefinedPlaces={[homePlace, workPlace]}
-      >
-      </GooglePlacesAutocomplete>
+      / >
     )
   }
 }

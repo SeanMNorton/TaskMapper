@@ -7,6 +7,7 @@ import {
   TextInput,
   View,
   AsyncStorage,
+  ScrollView,
 } from 'react-native'
 
 var t = require('tcomb-form-native')
@@ -43,26 +44,23 @@ class TaskEdit extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Form
-          ref="form"
-          type={Task}
-          onChange={this._onChange}
-          options={options}
-          value={this.props.item}
-        />
-        <Text>
-          {this.state}
-        </Text>
-        <View>
-          <GoogleSearch styles={{height: 10}}/>
-        </View>
-        <TouchableHighlight
-          style={[styles.button, styles.saveButton]}
-          onPress={this.onUpdate}
-          underlayColor='#99d9f4'>
-          <Text style={styles.buttonText}>Save</Text>
-        </TouchableHighlight>
+      <View style={[styles.container, {flexDirection: 'row', padding: 20} ]}>
+        <ScrollView style={{flex:5, height: 700}}>
+        <GoogleSearch style={{flex:1, padding: 20}} />
+            <Form
+              ref="form"
+              type={Task}
+              onChange={this._onChange}
+              options={options}
+              value={this.props.item}
+            />
+            <TouchableHighlight
+              style={[styles.button, styles.saveButton]}
+              onPress={this.onUpdate}
+              underlayColor='#99d9f4'>
+              <Text style={styles.buttonText}>Save</Text>
+            </TouchableHighlight>
+        </ScrollView>
       </View>
     )
   }
