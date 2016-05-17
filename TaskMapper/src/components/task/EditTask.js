@@ -20,7 +20,6 @@ var options = {
     txt: {
       label: 'Task Name',
       placeholder: 'enter your task',
-      autoFocus: true,
     },
     desc: {
       label: 'Description',
@@ -46,7 +45,7 @@ class TaskEdit extends React.Component {
     return (
       <View style={[styles.container, {flexDirection: 'row', padding: 20} ]}>
         <ScrollView style={{flex:5, height: 700}}>
-        <GoogleSearch style={{flex:1, padding: 20}} />
+        <GoogleSearch style={{flex:1, padding: 20}} location={this.props.item}/>
             <Form
               ref="form"
               type={Task}
