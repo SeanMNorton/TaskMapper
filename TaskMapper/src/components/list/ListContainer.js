@@ -68,9 +68,8 @@ class ListContainer extends React.Component {
         }
         newItem.location = searchObject.location
         newItem.name = searchObject.name
-        item = newItem
-      })
-
+        return newItem
+      }).then( (item) => {
         var items = this.state.items
         if (index) {
           items[index] = item
@@ -80,6 +79,7 @@ class ListContainer extends React.Component {
         this.setState({items: items})
         AsyncStorage.setItem("items", JSON.stringify(this.state.items))
         this.props.navigator.pop()
+      })
   }
   openItem(rowData, rowID) {
     this.props.navigator.push({

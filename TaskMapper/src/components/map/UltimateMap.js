@@ -2,18 +2,18 @@
 import React, { Component } from 'react'
 import {
   MapView,
+  AsyncStorage,
 } from 'react-native'
 
-const LATITUDE = 41.889357;
-const LONGITUDE = -87.637604;
-const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = 1.2;
+const LATITUDE = 41.889357
+const LONGITUDE = -87.637604
+const LATITUDE_DELTA = 0.0922
+const LONGITUDE_DELTA = 1.2
 
 function circleOverlay(marker) {
   var cLat = marker.latitude
   var cLong = marker.longitude
   var rInMeters = marker.radius
-  var setPinFromSearch = ('../search/GoogleSearch');
 
   var coords = []
   var tau = 2*Math.PI
@@ -42,60 +42,64 @@ var UltimateMap = React.createClass({
         longitudeDelta: LONGITUDE_DELTA,
       },
     markers: [],
-    };
+    }
   },
-  componentDidMount() {
-
-
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          var initialPosition = {
-            long: parseFloat(position.coords.longitude),
-            lat: parseFloat(position.coords.latitude)
-          }
-          this.setState({
-            initialPosition
-          })
-        },
-        (error) => alert(error.message),
-        {enableHighAccuracy: true, timeout: 20000, maximumAge: 5000}
-      );
-      this.watchID = navigator.geolocation.watchPosition((position) => {
-        var lastPosition = {
-          long: parseFloat(position.coords.longitude),
-          lat: parseFloat(position.coords.latitude)
-        }
-        this.setState({
-          lastPosition
-        });
-      });
-    },
-
-    componentWillUnmount() {
-    navigator.geolocation.clearWatch(this.watchID);
-  },
+  // componentDidMount() {
+  //   navigator.geolocation.getCurrentPosition(
+  //     (position) => {
+  //       var initialPosition = {
+  //         long: parseFloat(position.coords.longitude),
+  //         lat: parseFloat(position.coords.latitude)
+  //       }
+  //       this.setState({
+  //         initialPosition
+  //       })
+  //     },
+  //     (error) => alert(error.message),
+  //     {enableHighAccuracy: true, timeout: 20000, maximumAge: 5000}
+  //   )
+  //   this.watchID = navigator.geolocation.watchPosition((position) => {
+  //     var lastPosition = {
+  //       long: parseFloat(position.coords.longitude),
+  //       lat: parseFloat(position.coords.latitude)
+  //     }
+  //     this.setState({
+  //       lastPosition
+  //     })
+  //   })
+  // },
+  // componentWillUnmount() {
+  //   navigator.geolocation.clearWatch(this.watchID)
+  // },
   render: function() {
+    console.log("dog")
+    // AsyncStorage.removeItem("items")
+    // AsyncStorage.removeItem("currentSearch")
+    AsyncStorage.getItem("items")
+      .then( (itemsString) => {
+        if (itemsString) {
+          var itemsArray = JSON.parse(itemsString)
+          var markers = itemsArray.map((item, index) => {
+            return {
+                id: index.toString(),
+                latitude: item.location.lat,
+                longitude: item.location.lng,
+                radius: 100,
+                color: '#f00',
+              }
+            })
+            this.setState({markers: markers})
+        }
+      })
     return (
-      <MapView style={{flex: 2}}
-        annotations={[...this.state.markers]}
+      <MapView style={{flex: 1}}
+        annotations={this.annotations(this.state.markers)}
         overlays={this.overlays(this.state.markers)}
         region={this.state.region}
         showsUserLocation={true}
       />
     )
   },
-
-  setPinFromSearch: function(location) {
-    this.setState({
-      pin: {
-        longitude: this.lng,
-        latitude: this.lat,
-      }
-    })
-    this.state.markers.push(this.state.pin);
-    console.log(this.state.markers);
-  },
-
   onDragStateChange: function(event) {
     if (event.state === 'ending') {
       var newMarkers = this.state.markers.map(function(marker) {
@@ -114,8 +118,6 @@ var UltimateMap = React.createClass({
         id: marker.id,
         latitude: marker.latitude,
         longitude: marker.longitude,
-        latitudeDelta: marker.latitudeDelta,
-        longitudeDelta: marker.longitudeDelta,
         draggable: true,
         onDragStateChange: this.onDragStateChange,
         tintColor: marker.color,
