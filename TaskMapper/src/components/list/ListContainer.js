@@ -64,6 +64,7 @@ class ListContainer extends React.Component {
     var items = this.state.items
     items.splice(index, 1)
     this.setState({items: items})
+    AsyncStorage.setItem("items", JSON.stringify(this.state.items))
   }
   updateItem(item, index) {
     AsyncStorage.getItem("currentSearch")

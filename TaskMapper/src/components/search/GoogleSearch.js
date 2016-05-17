@@ -20,9 +20,15 @@ const workPlace = {description: 'Work', geometry: { location: { lat: 48.8496818,
 
 class GoogleSearch extends Component {
   render() {
+    var locationName = ''
+    if (locationName != null ){
+      locationName = this.props.location.name
+    } else {
+      locationName = 'Search'
+    }
     return (
       <GooglePlacesAutocomplete
-        placeholder='Search'
+        placeholder={locationName}
         minLength={2} // minimum length of text to search
         autoFocus={false}
         fetchDetails={true}
@@ -37,7 +43,7 @@ class GoogleSearch extends Component {
         // }
 
         getDefaultValue={() => {
-          return ''; // text input default value
+          return''; // text input default value
         }}
         query={{
           // available options: https://developers.google.com/places/web-service/autocomplete
