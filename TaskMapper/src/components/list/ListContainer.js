@@ -36,6 +36,7 @@ class ListContainer extends React.Component {
   }
   constructor() {
     super()
+
     this.state = {items: []}
     this.alertMenu = this.alertMenu.bind(this)
     this.deleteItem = this.deleteItem.bind(this)
@@ -53,12 +54,22 @@ class ListContainer extends React.Component {
       ]
     )
   }
+
   deleteItem(index) {
     var items = this.state.items
     items.splice(index, 1)
     this.setState({items: items})
     AsyncStorage.setItem("items", JSON.stringify(this.state.items))
   }
+
+  openItem(rowData, rowID) {
+    this.props.navigator.push({
+      title: rowData && rowData.txt || 'New Item',
+      component: EditTask,
+      passProps: {item: rowData, id: rowID, update: this.updateItem}
+    })
+  }
+
   updateItem(item, index) {
     AsyncStorage.getItem("currentSearch")
       .then( (searchString) => {
@@ -82,16 +93,10 @@ class ListContainer extends React.Component {
         this.props.navigator.pop()
       })
   }
-  openItem(rowData, rowID) {
-    this.props.navigator.push({
-      title: rowData && rowData.txt || 'New Item',
-      component: EditTask,
-      passProps: {item: rowData, id: rowID, update: this.updateItem}
-    })
-  }
+
  render() {
     return (
-      <View style={{flex:1}}>
+      <View style={{flex:1,}}>
         <TaskList
           items={this.state.items}
           onPressItem={this.openItem}
@@ -101,7 +106,7 @@ class ListContainer extends React.Component {
           style={styles.newButton}
           underlayColor='#99d9f4'
           onPress={this.openItem}>
-          <Text style={styles.buttonText}>+</Text>
+          <Text style={styles.buttonText}>Add Task</Text>
         </TouchableHighlight>
       </View>
     )
