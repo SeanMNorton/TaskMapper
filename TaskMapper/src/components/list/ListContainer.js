@@ -14,14 +14,21 @@ var EditTask = require('../task/EditTask')
 var TaskList = require('./TaskList')
 var styles = require('../../styles/styles')
 
-// [
-//   {txt: 'Learn react native', desc:'woot!', complete: false },
-//   {txt: 'Make a to-do app', desc:'woot!', complete: true },
-// ]
 class ListContainer extends React.Component {
+  // componentDidMount() {
+  //   AsyncStorage.getItem("tasks")
+  //   .then((rawTasks) => JSON.parse(rawTasks))
+  //   .then((tasks) => {
+  //     for (var i in tasks) {
+  //       var due = tasks[i]['due']
+  //       tasks[i]['due'] = new Date(due)
+  //     }
+  //     this.setState({items: tasks})
+  //   })
+  // }
   componentDidMount() {
-    // AsyncStorage.removeItem("items")
-    AsyncStorage.getItem("items")
+    // AsyncStorage.clear()
+    AsyncStorage.getItem("tasks")
       .then( (itemsString) => {
         if (itemsString) {
           var itemsArray = JSON.parse(itemsString)
@@ -75,10 +82,11 @@ class ListContainer extends React.Component {
         if (index) {
           items[index] = item
         } else {
+          item.set = new Date()
           items.push(item)
         }
         this.setState({items: items})
-        AsyncStorage.setItem("items", JSON.stringify(this.state.items))
+        AsyncStorage.setItem("tasks", JSON.stringify(this.state.items))
         this.props.navigator.pop()
       })
   }
