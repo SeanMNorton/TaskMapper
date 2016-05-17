@@ -58,16 +58,23 @@ function makeMarker(task) {
     longitude: task.location.lng,
     radius: impendingRadius(fracThrough),
     color: impendingColor(fracThrough),
-    open: true,
   }
 }
 
 function impendingRadius(x) {
-  return 200/(1 - x)
+  if (x < 1) {
+    return 200/(1 - x)
+  } else {
+    return 0
+  }
 }
 
 function impendingColor(x) {
-  var hue = x
+  if (x < 1) {
+    var hue = (x/3)+(2/3)
+  } else {
+    var hue = 1
+  }
   var rgb = hslToRgb(hue, 1, .5);
   return 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
 }
@@ -116,7 +123,28 @@ var UltimateMap = React.createClass({
       },
     }
   },
-  componentDidMount() {
+  componentDidMount: function() {
+    setInterval(() => {
+      AsyncStorage.getItem("tasks")
+      .then( (rawTasks) => JSON.parse(rawTasks))
+      .then( (tasks) => {
+        this.setState({markers: tasks.map(makeMarker)})
+      })
+    }, 16)
+
+    setInterval(() => {
+      var self = this.state.myPosition
+      var newMarkers = []
+      for (var i in this.state.markers) {
+        var marker = this.state.markers[i]
+        if (inCircle(self, marker)) {
+          AlertIOS.alert(marker.name)
+        }
+        newMarkers.push(marker)
+      }
+      this.setState({markers: newMarkers})
+    }, 1000)
+
     navigator.geolocation.getCurrentPosition(
       (position) => {
         var myPosition = {
@@ -140,27 +168,8 @@ var UltimateMap = React.createClass({
       })
     })
   },
-  componentWillReceiveProps: function() {
-    // AsyncStorage.clear()
-    AsyncStorage.getItem("tasks")
-    .then( (rawTasks) => JSON.parse(rawTasks))
-    .then( (tasks) => {
-      this.setState({markers: tasks.map(makeMarker)})
-    })
-
-    var self = this.state.myPosition
-    var newMarkers = []
-    for (var i in this.state.markers) {
-      var marker = this.state.markers[i]
-      if (marker.open && inCircle(self, marker)) {
-        AlertIOS.alert(marker.name)
-        marker.open = false
-      }
-      newMarkers.push(marker)
-    }
-    this.setState({markers: newMarkers})
-  },
   render: function() {
+    // AsyncStorage.clear()
     return (
       <MapView style={{flex: 1}}
       region={this.state.region}
