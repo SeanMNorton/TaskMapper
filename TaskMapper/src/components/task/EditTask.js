@@ -43,22 +43,23 @@ class TaskEdit extends React.Component {
     return (
       <View style={[styles.container, {flexDirection: 'row', padding: 20} ]}>
         <ScrollView style={{flex:1, height: 700}}>
-          <GoogleSearch style={{flex:1, padding: 20}} location={this.props.item}/>
-          <Form
-            ref="form"
-            type={Task}
-            onChange={this._onChange}
-            options={options}
-            value={this.props.item}
-          />
-          <TouchableHighlight
-            style={[styles.button,]}
-            onPress={this.onUpdate}
-            underlayColor='#99d9f4'>
-            <Text style={{color: 'white', padding: 10}}>Save</Text>
-          </TouchableHighlight>
-        </ScrollView>
-      </View>
+        <Text style={{fontSize: 17, fontWeight: '500', padding: 4}}>Location</Text>
+        <GoogleSearch style={{flex:1, padding: 20}} location={this.props.item}/>
+        <Form
+          ref="form"
+          type={Task}
+          onChange={this._onChange}
+          options={options}
+          value={this.props.item}
+        />
+        <TouchableHighlight
+          style={[styles.button,]}
+          onPress={this.onUpdate}
+          underlayColor='#99d9f4'>
+          <Text style={{fontSize: 24, color: 'white', padding: 10}}>Save</Text>
+        </TouchableHighlight>
+      </ScrollView>
+    </View>
     )
   }
 }

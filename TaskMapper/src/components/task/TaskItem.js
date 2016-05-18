@@ -29,7 +29,7 @@ class TaskItem extends React.Component {
             <Text style={[ styles.txt, item.complete && styles.completed]}>
               {item.txt}
               </Text>
-            
+              <Text style={{fontSize: 14, paddingLeft: 15, paddingBottom: 5}}> Due: {thisThang}</Text>
 
           </View>
         </TouchableHighlight>
