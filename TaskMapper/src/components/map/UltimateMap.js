@@ -38,7 +38,6 @@ function makeOverlay(marker) {
 
 function makeAnnotation(marker) {
   return {
-    id: marker.id,
     latitude: marker.latitude,
     longitude: marker.longitude,
     tintColor: marker.color,
@@ -58,6 +57,7 @@ function makeMarker(task) {
     longitude: task.location.lng,
     radius: impendingRadius(fracThrough),
     color: impendingColor(fracThrough),
+    alerted: task.alerted,
   }
 }
 
@@ -137,13 +137,16 @@ var UltimateMap = React.createClass({
       var newMarkers = []
       for (var i in this.state.markers) {
         var marker = this.state.markers[i]
-        if (inCircle(self, marker)) {
+        if ((!marker.alerted) && inCircle(self, marker)) {
           AlertIOS.alert(marker.name)
+          marker.alerted = true
+        } else {
+          marker.alerted = false
         }
         newMarkers.push(marker)
       }
       this.setState({markers: newMarkers})
-    }, 1000)
+    }, 60000)
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
