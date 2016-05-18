@@ -187,19 +187,7 @@ var UltimateMap = React.createClass({
       region={this.state.region}
       showsUserLocation={true}
       annotations={this.state.markers.map(makeAnnotation)}
-      overlays={this.state.markers.map(makeOverlay)}>
-        {this.state.markers.map(marker => (
-            <MapView.Marker
-              key={marker.id}>
-              // coordinate={[marker.latitude, marker.longitude]}>
-              <MapView.Callout>
-                <View>
-                </View>
-              </MapView.Callout>
-              </MapView.Marker>
-          ))}
-          </MapView>
-
+      overlays={this.state.markers.map(makeOverlay)} />
     )
   },
   componentWillUnmount() {
