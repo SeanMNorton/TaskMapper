@@ -131,6 +131,34 @@ var UltimateMap = React.createClass({
       },
     }
   },
+  alertMenu(marker) {
+    AlertIOS.alert(
+      marker.txt + ":  " + marker.desc,
+      null,
+      [
+        {text: 'Complete and Delete', onPress: () => this.deleteMarker(marker)},
+        // {text: 'Edit', onPress: () => this.openItem(rowData, rowID)},
+        {text: 'Snooze'}
+      ]
+    )
+  },
+
+  deleteMarker(marker){
+    var name = marker.txt;
+    AsyncStorage.getItem("tasks")
+    .then( (rawTasks) => JSON.parse(rawTasks))
+    .then( (tasks) => {
+      var names = [];
+      for(i=0; i<tasks.length; i++){
+        names.push(tasks[i].txt)
+      }
+      index = names.indexOf(name)
+      tasks.splice(index, 1)
+      this.setState({tasks: tasks})
+      AsyncStorage.setItem("tasks", JSON.stringify(this.state.tasks))
+    })
+  },
+
   componentDidMount: function() {
     setInterval(() => {
       AsyncStorage.getItem("tasks")
@@ -146,7 +174,8 @@ var UltimateMap = React.createClass({
       for (var i in this.state.markers) {
         var marker = this.state.markers[i]
         if ((!marker.alerted) && inCircle(self, marker)) {
-          AlertIOS.alert(marker.txt, marker.desc)
+          this.alertMenu(marker)
+          // AlertIOS.alert(marker.txt, marker.desc, null, {text: 'Delete', onPress: () => this.deleteItem(rowID)})
           marker.alerted = true
         } else {
           marker.alerted = false
