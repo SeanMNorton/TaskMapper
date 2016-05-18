@@ -22,8 +22,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		2B0E63471CECB8F9009802A2 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B0E63461CECB8F9009802A2 /* Images-2.xcassets */; };
-		2B0E63531CECC3C0009802A2 /* IOS7x3.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B0E63521CECC3C0009802A2 /* IOS7x3.png */; };
-		2BF790A91CECABEC00EFCC0E /* TaskMapperLogo copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF790A81CECABEC00EFCC0E /* TaskMapperLogo copy.png */; };
 		451FDC501CEA9067005D5096 /* DBC.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 451FDC4F1CEA9067005D5096 /* DBC.gpx */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
@@ -124,13 +122,11 @@
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = TaskMapper/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = TaskMapper/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = TaskMapper/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = /Applications/Xcode.app/Contents/Developer/../../../../Users/DBC/TaskMapper/TaskMapper/ios/TaskMapper/Images.xcassets; sourceTree = "<absolute>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TaskMapper/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TaskMapper/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2B0E63461CECB8F9009802A2 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "TaskMapper/Images-2.xcassets"; sourceTree = "<group>"; };
-		2B0E63521CECC3C0009802A2 /* IOS7x3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = IOS7x3.png; path = ../IOS7x3.png; sourceTree = "<group>"; };
-		2BF790A81CECABEC00EFCC0E /* TaskMapperLogo copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TaskMapperLogo copy.png"; path = "../../../Desktop/TaskMapperLogo copy.png"; sourceTree = "<group>"; };
 		451FDC4F1CEA9067005D5096 /* DBC.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = DBC.gpx; path = ../../../../Downloads/DBC.gpx; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -301,8 +297,6 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* TaskMapperTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
-				2BF790A81CECABEC00EFCC0E /* TaskMapperLogo copy.png */,
-				2B0E63521CECC3C0009802A2 /* IOS7x3.png */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -528,10 +522,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B0E63531CECC3C0009802A2 /* IOS7x3.png in Resources */,
 				451FDC501CEA9067005D5096 /* DBC.gpx in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				2BF790A91CECABEC00EFCC0E /* TaskMapperLogo copy.png in Resources */,
 				2B0E63471CECB8F9009802A2 /* Images-2.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
