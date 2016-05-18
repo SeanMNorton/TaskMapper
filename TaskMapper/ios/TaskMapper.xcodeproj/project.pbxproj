@@ -21,6 +21,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		2B0E63471CECB8F9009802A2 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B0E63461CECB8F9009802A2 /* Images-2.xcassets */; };
 		2BF790A91CECABEC00EFCC0E /* TaskMapperLogo copy.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BF790A81CECABEC00EFCC0E /* TaskMapperLogo copy.png */; };
 		451FDC501CEA9067005D5096 /* DBC.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 451FDC4F1CEA9067005D5096 /* DBC.gpx */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -126,6 +127,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = TaskMapper/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = TaskMapper/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		2B0E63461CECB8F9009802A2 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "TaskMapper/Images-2.xcassets"; sourceTree = "<group>"; };
 		2BF790A81CECABEC00EFCC0E /* TaskMapperLogo copy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TaskMapperLogo copy.png"; path = "../../../Desktop/TaskMapperLogo copy.png"; sourceTree = "<group>"; };
 		451FDC4F1CEA9067005D5096 /* DBC.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = DBC.gpx; path = ../../../../Downloads/DBC.gpx; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				2B0E63461CECB8F9009802A2 /* Images-2.xcassets */,
 			);
 			name = TaskMapper;
 			sourceTree = "<group>";
@@ -525,6 +528,7 @@
 				451FDC501CEA9067005D5096 /* DBC.gpx in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				2BF790A91CECABEC00EFCC0E /* TaskMapperLogo copy.png in Resources */,
+				2B0E63471CECB8F9009802A2 /* Images-2.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -641,6 +645,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = TaskMapper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
@@ -661,6 +666,7 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				INFOPLIST_FILE = TaskMapper/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
