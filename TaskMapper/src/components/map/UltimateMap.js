@@ -7,7 +7,6 @@ import {
   Text,
 } from 'react-native'
 
-var CustomCallout = require('../map/CustomCallout')
 
 var chicagoRegion = {
   latitude: 41.889357,
