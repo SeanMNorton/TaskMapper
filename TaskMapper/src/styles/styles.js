@@ -22,7 +22,7 @@ var styles = StyleSheet.create({
   },
   buttonText: {
     flex: 1,
-    alignSelf: 'center',
+
   },
   completed: {
     color: 'red',
@@ -31,6 +31,7 @@ var styles = StyleSheet.create({
   listItem: {
     borderBottomColor: '#1E3A47',
     borderBottomWidth: 1,
+    flex:1,
   },
   txt: {
     color: '#1E3A47',
@@ -47,13 +48,13 @@ var styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#1E3A47',
     marginTop: 0,
-    padding: 2,
-    height: 60,
+    padding: 0,
+
+    flex: 1,
   },
   buttonText: {
-    flex: 1,
     color: 'white',
-    padding: 20,
+    padding: 0,
 
   },
   footer: {
@@ -61,17 +62,19 @@ var styles = StyleSheet.create({
     marginTop: 200,
   },
   button: {
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
+    // alignSelf: 'flex-end',
+    backgroundColor: '#1E3A47',
     alignItems: 'center',
-    borderColor: 'red',
-    borderWidth: 1,
     borderRadius: 3,
-    marginTop: 5,
+    marginTop: 10,
     padding: 2,
+    paddingBottom: 0,
+    marginBottom: 0,
   },
   listView: {
-    flex: 2,
-    // marginTop: 20,
+    flex: 9,
+
   },
 })
 

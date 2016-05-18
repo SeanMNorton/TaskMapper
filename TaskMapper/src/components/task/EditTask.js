@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 
 var t = require('tcomb-form-native')
-var Task = t.struct({txt: t.Str, desc: t.Str, complete: t.Bool, due: t.Date})
+var Task = t.struct({txt: t.Str, desc: t.Str, due: t.Date})
 var Form = t.form.Form
 var styles = require('../../styles/styles')
 var GoogleSearch = require('../search/GoogleSearch');
@@ -42,7 +42,7 @@ class TaskEdit extends React.Component {
   render() {
     return (
       <View style={[styles.container, {flexDirection: 'row', padding: 20} ]}>
-        <ScrollView style={{flex:5, height: 700}}>
+        <ScrollView style={{flex:1, height: 700}}>
           <GoogleSearch style={{flex:1, padding: 20}} location={this.props.item}/>
           <Form
             ref="form"
@@ -52,10 +52,10 @@ class TaskEdit extends React.Component {
             value={this.props.item}
           />
           <TouchableHighlight
-            style={[styles.button, styles.saveButton]}
+            style={[styles.button,]}
             onPress={this.onUpdate}
             underlayColor='#99d9f4'>
-            <Text style={styles.buttonText}>Save</Text>
+            <Text style={{color: 'white', padding: 10}}>Save</Text>
           </TouchableHighlight>
         </ScrollView>
       </View>
