@@ -11,13 +11,14 @@ import {
 
 var CountDown = require('../common/counter')
 var styles = require('../../styles/styles')
-
+var moment = require('moment')
 class TaskItem extends React.Component {
   render() {
     var item = this.props.item
     var dueDate = this.props.item.due
     var now = Date.now()
     var diffDays = parseInt((dueDate - now)/ 1000)
+    var thisThang = moment(dueDate).format('lll')
 
     return (
       <View style={styles.allView}>
