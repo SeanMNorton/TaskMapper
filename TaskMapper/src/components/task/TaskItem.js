@@ -20,15 +20,13 @@ class TaskItem extends React.Component {
     var diffDays = parseInt((dueDate - now)/ 1000)
 
     return (
-      <View
-      style={{marginTop: 2,textAlign: 'left',}}
-      >
+      <View style={styles.allView}>
         <TouchableHighlight
           underlayColor={'#1FBBFF'}
           onPress={this.props.onPress}
           onLongPress={this.props.onLongPress}>
           <View style={[styles.listItem, {justifyContent: 'flex-start'}]}>
-            <Text style={[styles.txt, item.complete && styles.completed]}>
+            <Text style={[styles.allView, styles.txt, item.complete && styles.completed]}>
               {item.txt}
             </Text>
           </View>
@@ -38,7 +36,6 @@ class TaskItem extends React.Component {
     )
   }
 }
-
 // Counter in seconds
 // <View>
 // <CountDown

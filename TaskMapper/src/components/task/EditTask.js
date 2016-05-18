@@ -1,12 +1,10 @@
-'use strict'
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
   TouchableHighlight,
   StyleSheet,
   Text,
   TextInput,
   View,
-  AsyncStorage,
   ScrollView,
 } from 'react-native'
 
@@ -45,20 +43,20 @@ class TaskEdit extends React.Component {
     return (
       <View style={[styles.container, {flexDirection: 'row', padding: 20} ]}>
         <ScrollView style={{flex:5, height: 700}}>
-        <GoogleSearch style={{flex:1, padding: 20}} location={this.props.item}/>
-            <Form
-              ref="form"
-              type={Task}
-              onChange={this._onChange}
-              options={options}
-              value={this.props.item}
-            />
-            <TouchableHighlight
-              style={[styles.button, styles.saveButton]}
-              onPress={this.onUpdate}
-              underlayColor='#99d9f4'>
-              <Text style={styles.buttonText}>Save</Text>
-            </TouchableHighlight>
+          <GoogleSearch style={{flex:1, padding: 20}} location={this.props.item}/>
+          <Form
+            ref="form"
+            type={Task}
+            onChange={this._onChange}
+            options={options}
+            value={this.props.item}
+          />
+          <TouchableHighlight
+            style={[styles.button, styles.saveButton]}
+            onPress={this.onUpdate}
+            underlayColor='#99d9f4'>
+            <Text style={styles.buttonText}>Save</Text>
+          </TouchableHighlight>
         </ScrollView>
       </View>
     )
