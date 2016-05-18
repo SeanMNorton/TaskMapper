@@ -36,7 +36,10 @@ var styles = StyleSheet.create({
   txt: {
     color: '#1E3A47',
     fontWeight: '700',
-    padding: 15,
+    paddingTop: 15,
+    paddingLeft: 15,
+    paddingRight: 15,
+    paddingBottom: 5,
     fontSize: 17,
   },
   map: {

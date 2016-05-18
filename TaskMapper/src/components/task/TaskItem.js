@@ -9,14 +9,24 @@ import {
   AlertIOS,
 } from 'react-native'
 
+var moment = require('moment');
 var CountDown = require('../common/counter')
 var styles = require('../../styles/styles')
 
-class TaskItem extends React.Component {
+
+
+
+
+  class TaskItem extends React.Component {
+
+
+
   render() {
     var item = this.props.item
     var dueDate = this.props.item.due
     var now = Date.now()
+    var thisThang = moment(this.props.item.due).format('lll')
+
     var diffDays = parseInt((dueDate - now)/ 1000)
 
     return (
@@ -29,7 +39,7 @@ class TaskItem extends React.Component {
             <Text style={[ styles.txt, item.complete && styles.completed]}>
               {item.txt}
               </Text>
-            
+              <Text style={{fontSize: 14, paddingLeft: 15, paddingBottom: 5}}> Due: {thisThang}</Text>
 
           </View>
         </TouchableHighlight>
@@ -123,3 +133,4 @@ class TaskItem extends React.Component {
 // }
 
 module.exports = TaskItem
+// {this.state.thisThang}

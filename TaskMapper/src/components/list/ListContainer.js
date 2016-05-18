@@ -26,6 +26,7 @@ class ListContainer extends React.Component {
         tasks[i]['due'] = new Date(due)
       }
       this.setState({items: tasks})
+
     })
   }
   constructor() {
@@ -80,7 +81,7 @@ class ListContainer extends React.Component {
         items.push(item)
       }
       this.setState({items: items})
-      
+
       AsyncStorage.setItem("tasks", JSON.stringify(this.state.items))
       this.props.navigator.pop()
     } )
