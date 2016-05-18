@@ -12,7 +12,7 @@ var chicagoRegion = {
   latitude: 41.889357,
   longitude: -87.637604,
   latitudeDelta: 0.0922,
-  longitudeDelta: .09,
+  longitudeDelta: 0.09,
 }
 
 function circleCoords(cLat, cLong, rInMeters) {
@@ -39,10 +39,12 @@ function makeOverlay(marker) {
 }
 
 function makeAnnotation(marker) {
+  var dueDate = new Date(marker.due)
+  var format = {month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'}
+  var title = marker.txt + " : " + dueDate.toLocaleDateString('en-US', format)
   return {
     id: marker.id,
-    title: marker.txt,
-    desc: marker.desc,
+    title: title,
     latitude: marker.latitude,
     longitude: marker.longitude,
     tintColor: marker.color,
@@ -59,7 +61,7 @@ function makeMarker(task) {
   return {
     txt: task.txt,
     desc: task.desc,
-    name: task.name,
+    due: task.due,
     latitude: task.location.lat,
     longitude: task.location.lng,
     radius: impendingRadius(fracThrough),
@@ -185,19 +187,7 @@ var UltimateMap = React.createClass({
       region={this.state.region}
       showsUserLocation={true}
       annotations={this.state.markers.map(makeAnnotation)}
-      overlays={this.state.markers.map(makeOverlay)}>
-        {this.state.markers.map(marker => (
-            <MapView.Marker
-              key={marker.id}>
-              // coordinate={[marker.latitude, marker.longitude]}>
-              <MapView.Callout>
-                <View>
-                </View>
-              </MapView.Callout>
-              </MapView.Marker>
-          ))}
-          </MapView>
-
+      overlays={this.state.markers.map(makeOverlay)} />
     )
   },
   componentWillUnmount() {
