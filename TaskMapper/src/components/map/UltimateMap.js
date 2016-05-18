@@ -147,7 +147,7 @@ var UltimateMap = React.createClass({
       for (var i in this.state.markers) {
         var marker = this.state.markers[i]
         if ((!marker.alerted) && inCircle(self, marker)) {
-          AlertIOS.alert(marker.name)
+          AlertIOS.alert(marker.txt, marker.desc)
           marker.alerted = true
         } else {
           marker.alerted = false
@@ -181,7 +181,6 @@ var UltimateMap = React.createClass({
     })
   },
   render: function() {
-    // AsyncStorage.clear()
     return (
       <MapView style={{flex: 1}}
       region={this.state.region}
