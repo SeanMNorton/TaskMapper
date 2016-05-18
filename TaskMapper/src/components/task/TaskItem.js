@@ -26,9 +26,11 @@ class TaskItem extends React.Component {
           onPress={this.props.onPress}
           onLongPress={this.props.onLongPress}>
           <View style={[styles.listItem, {justifyContent: 'flex-start'}]}>
-            <Text style={[styles.allView, styles.txt, item.complete && styles.completed]}>
+            <Text style={[ styles.txt, item.complete && styles.completed]}>
               {item.txt}
-            </Text>
+              </Text>
+            
+
           </View>
         </TouchableHighlight>
         <View style={styles.hr}/>

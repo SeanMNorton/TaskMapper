@@ -80,6 +80,7 @@ class ListContainer extends React.Component {
         items.push(item)
       }
       this.setState({items: items})
+      
       AsyncStorage.setItem("tasks", JSON.stringify(this.state.items))
       this.props.navigator.pop()
     } )
@@ -92,12 +93,13 @@ class ListContainer extends React.Component {
           items={this.state.items}
           onPressItem={this.openItem}
           onLongPressItem={this.alertMenu}
+
         />
         <TouchableHighlight
-          style={styles.newButton}
+          style={[styles.newButton]}
           underlayColor='#99d9f4'
           onPress={this.openItem}>
-          <Text style={styles.buttonText}>Add Task</Text>
+          <Text style={{fontSize: 60, color: 'white', fontWeight: '500' }}>+</Text>
         </TouchableHighlight>
       </View>
     )
