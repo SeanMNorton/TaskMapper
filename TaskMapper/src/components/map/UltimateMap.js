@@ -12,7 +12,7 @@ var chicagoRegion = {
   latitude: 41.889357,
   longitude: -87.637604,
   latitudeDelta: 0.0922,
-  longitudeDelta: .09,
+  longitudeDelta: 1.2,
 }
 
 function circleCoords(cLat, cLong, rInMeters) {
@@ -185,19 +185,7 @@ var UltimateMap = React.createClass({
       region={this.state.region}
       showsUserLocation={true}
       annotations={this.state.markers.map(makeAnnotation)}
-      overlays={this.state.markers.map(makeOverlay)}>
-        {this.state.markers.map(marker => (
-            <MapView.Marker
-              key={marker.id}>
-              // coordinate={[marker.latitude, marker.longitude]}>
-              <MapView.Callout>
-                <View>
-                </View>
-              </MapView.Callout>
-              </MapView.Marker>
-          ))}
-          </MapView>
-
+      overlays={this.state.markers.map(makeOverlay)} />
     )
   },
   componentWillUnmount() {
