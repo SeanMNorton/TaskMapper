@@ -10,6 +10,8 @@ import {
   AsyncStorage,
 } from 'react-native'
 
+import hslToRgb from '../common/colorConvert'
+
 var EditTask = require('../task/EditTask')
 var TaskList = require('./TaskList')
 var styles = require('../../styles/styles')
@@ -74,7 +76,7 @@ class ListContainer extends React.Component {
         items[index] = item
       } else {
         item.set = new Date()
-        item.color = '#'+Math.floor(Math.random()*16777215).toString(16) // random color
+        item.color = hslToRgb(Math.random(), 1, 0.5) //'#'+Math.floor(Math.random()*16777215).toString(16) // random color
         item.alerted = false
         items.push(item)
       }

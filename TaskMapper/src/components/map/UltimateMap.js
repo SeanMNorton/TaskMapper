@@ -17,12 +17,15 @@ var chicagoRegion = {
 }
 
 function circleCoords(cLat, cLong, rInMeters) {
+  if (rInMeters === 0) {
+    return []
+  }
   var coords = []
   var tau = 2*Math.PI
   var rLat = rInMeters/111111.1
   var rLong = rInMeters/(111111.1 * Math.cos(cLat*tau/360))
 
-  var n = 100 // "circle" = n-sided polygon
+  var n = 6 // "circle" = n-sided polygon
   for (var i = 0; i <= n; i++) {
     var lat = cLat + rLat * Math.cos(tau*i/n)
     var long = cLong + rLong * Math.sin(tau*i/n)
@@ -39,7 +42,7 @@ function makeOverlay(marker) {
 
   return {
     coordinates: circleCoords(marker.latitude, marker.longitude, impendingRadius(fracThrough)),
-    strokeColor: impendingColor(fracThrough),
+    strokeColor: marker.color, // impendingColor(fracThrough),
     lineWidth: 3,
   }
 }
@@ -81,10 +84,13 @@ function impendingColor(x) {
   } else {
     var hue = 1
   }
-  return hslToRgb(hue, 1, .5)
+  return hslToRgb(hue, 1, 0.5)
 }
 
 function inCircle(self, marker) {
+  if (marker.radius === 0) {
+    return false
+  }
   var tau = 2 * Math.PI
   var avgY = (self.latitude + marker.latitude)/2
 
