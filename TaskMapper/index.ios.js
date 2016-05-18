@@ -48,3 +48,5 @@ var styles = StyleSheet.create({
 })
 
 AppRegistry.registerComponent('TaskMapper', () => TaskMapper)
+
+console.disableYellowBox = true
