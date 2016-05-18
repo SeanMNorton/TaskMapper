@@ -35,13 +35,8 @@ function circleCoords(cLat, cLong, rInMeters) {
 }
 
 function makeOverlay(marker) {
-  var currentTime = new Date().getTime()
-  var setTime = new Date(marker.set).getTime()
-  var dueTime = new Date(marker.due).getTime()
-  var fracThrough = (currentTime-setTime)/(dueTime-setTime)
-
   return {
-    coordinates: circleCoords(marker.latitude, marker.longitude, impendingRadius(fracThrough)),
+    coordinates: circleCoords(marker.latitude, marker.longitude, marker.radius),
     strokeColor: marker.color, // impendingColor(fracThrough),
     lineWidth: 3,
   }
@@ -58,6 +53,10 @@ function makeAnnotation(marker) {
 }
 
 function makeMarker(task) {
+  var currentTime = new Date().getTime()
+  var setTime = new Date(task.set).getTime()
+  var dueTime = new Date(task.due).getTime()
+  var fracThrough = (currentTime-setTime)/(dueTime-setTime)
   return {
     txt: task.txt,
     desc: task.desc,
@@ -66,7 +65,7 @@ function makeMarker(task) {
     latitude: task.location.lat,
     longitude: task.location.lng,
     color: task.color,
-    alerted: task.alerted,
+    radius: impendingRadius(fracThrough),
   }
 }
 
@@ -88,6 +87,8 @@ function impendingColor(x) {
 }
 
 function inCircle(self, marker) {
+  console.log(self)
+  console.log(marker)
   if (marker.radius === 0) {
     return false
   }
@@ -123,19 +124,13 @@ var UltimateMap = React.createClass({
 
     setInterval(() => {
       var self = this.state.myPosition
-      var newMarkers = []
       for (var i in this.state.markers) {
         var marker = this.state.markers[i]
-        if ((!marker.alerted) && inCircle(self, marker)) {
+        if (inCircle(self, marker)) {
           AlertIOS.alert(marker.txt, marker.desc)
-          marker.alerted = true
-        } else {
-          marker.alerted = false
         }
-        newMarkers.push(marker)
       }
-      this.setState({markers: newMarkers})
-    }, 60000)
+    }, 1000)
 
     navigator.geolocation.getCurrentPosition(
       (position) => {

@@ -77,7 +77,6 @@ class ListContainer extends React.Component {
       } else {
         item.set = new Date()
         item.color = hslToRgb(Math.random(), 1, 0.5) //'#'+Math.floor(Math.random()*16777215).toString(16) // random color
-        item.alerted = false
         items.push(item)
       }
       this.setState({items: items})
