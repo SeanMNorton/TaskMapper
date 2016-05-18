@@ -1,5 +1,4 @@
-'use strict'
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import {
   MapView,
   AsyncStorage,
@@ -7,6 +6,8 @@ import {
   View,
   Text,
 } from 'react-native'
+
+var CustomCallout = require('../map/CustomCallout')
 
 var chicagoRegion = {
   latitude: 41.889357,
@@ -187,7 +188,7 @@ var UltimateMap = React.createClass({
       region={this.state.region}
       showsUserLocation={true}
       annotations={this.state.markers.map(makeAnnotation)}
-      overlays={this.state.markers.map(makeOverlay)} />
+      overlays={this.state.markers.map(makeOverlay)}/>
     )
   },
   componentWillUnmount() {
