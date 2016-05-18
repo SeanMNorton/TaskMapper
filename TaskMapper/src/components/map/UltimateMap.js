@@ -39,10 +39,12 @@ function makeOverlay(marker) {
 }
 
 function makeAnnotation(marker) {
+  var dueDate = new Date(marker.due)
+  var format = {month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'}
+  var title = marker.txt + " : " + dueDate.toLocaleDateString('en-US', format)
   return {
     id: marker.id,
-    title: marker.txt,
-    desc: marker.desc,
+    title: title,
     latitude: marker.latitude,
     longitude: marker.longitude,
     tintColor: marker.color,
@@ -59,7 +61,7 @@ function makeMarker(task) {
   return {
     txt: task.txt,
     desc: task.desc,
-    name: task.name,
+    due: task.due,
     latitude: task.location.lat,
     longitude: task.location.lng,
     radius: impendingRadius(fracThrough),
