@@ -17,7 +17,8 @@ var CountDown = React.createClass({
   mixins: [TimerMixin],
   getInitialState: function () {
     return {
-      time: this.props.time ,
+      task: this.props.item,
+      time: 'loading...',
       dueDate: this.props.dueDate,
       disabled: true
     }
@@ -36,7 +37,7 @@ var CountDown = React.createClass({
               style={[styles.wrapper,this.props.buttonStyle]}
               >
 
-              <Text style={[style]}>{this.props.text}({this.state.time})</Text>
+              <Text style={[style]}>{this.state.time}</Text>
 
           </View>
     } else {
@@ -66,13 +67,13 @@ var CountDown = React.createClass({
 
   _countdown(){
     var timer = function () {
-       var time = parseInt((this.state.dueDate - Date.now())/ 1000)
+       var time = (this.state.time) - 1
       this.setState({time: time})
       if (time > 0) {
         this.setTimeout(timer, 1000)
-        if (time == 2 ){
+        if (time == 1 ){
           AlertIOS.alert(
-                "This alert happens at 1second and is in the counter.js!"
+                this.state.task.txt + ' at ' + this.state.task.name, 'Due now!'
               )
         }
       } else {

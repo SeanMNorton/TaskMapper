@@ -5,7 +5,7 @@ import {
   NavigatorIOS,
   StyleSheet,
 } from 'react-native'
-
+console.disableYellowBox = true;
 var UltimateMap = require('./src/components/map/UltimateMap');
 var ListContainer = require('./src/components/list/ListContainer');
 var EditTask = require('./src/components/task/EditTask');

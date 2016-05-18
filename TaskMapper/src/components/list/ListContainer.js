@@ -10,6 +10,8 @@ import {
   AsyncStorage,
 } from 'react-native'
 
+import hslToRgb from '../common/colorConvert'
+
 var EditTask = require('../task/EditTask')
 var TaskList = require('./TaskList')
 var styles = require('../../styles/styles')
@@ -74,10 +76,11 @@ class ListContainer extends React.Component {
         items[index] = item
       } else {
         item.set = new Date()
-        item.alerted = false
+        item.color = hslToRgb(Math.random(), 1, 0.5) //'#'+Math.floor(Math.random()*16777215).toString(16) // random color
         items.push(item)
       }
       this.setState({items: items})
+      
       AsyncStorage.setItem("tasks", JSON.stringify(this.state.items))
       this.props.navigator.pop()
     } )
@@ -90,12 +93,13 @@ class ListContainer extends React.Component {
           items={this.state.items}
           onPressItem={this.openItem}
           onLongPressItem={this.alertMenu}
+
         />
         <TouchableHighlight
-          style={styles.newButton}
+          style={[styles.newButton]}
           underlayColor='#99d9f4'
           onPress={this.openItem}>
-          <Text style={styles.buttonText}>Add Task</Text>
+          <Text style={{fontSize: 60, color: 'white', fontWeight: '500' }}>+</Text>
         </TouchableHighlight>
       </View>
     )
