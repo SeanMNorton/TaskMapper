@@ -4,6 +4,8 @@ import {
   MapView,
   AsyncStorage,
   AlertIOS,
+  View,
+  Text,
 } from 'react-native'
 
 var chicagoRegion = {
@@ -38,6 +40,9 @@ function makeOverlay(marker) {
 
 function makeAnnotation(marker) {
   return {
+    id: marker.id,
+    title: marker.txt,
+    desc: marker.desc,
     latitude: marker.latitude,
     longitude: marker.longitude,
     tintColor: marker.color,
@@ -52,6 +57,8 @@ function makeMarker(task) {
   var fracThrough = (currentTime-setTime)/(dueTime-setTime)
 
   return {
+    txt: task.txt,
+    desc: task.desc,
     name: task.name,
     latitude: task.location.lat,
     longitude: task.location.lng,
@@ -178,8 +185,19 @@ var UltimateMap = React.createClass({
       region={this.state.region}
       showsUserLocation={true}
       annotations={this.state.markers.map(makeAnnotation)}
-      overlays={this.state.markers.map(makeOverlay)}
-      />
+      overlays={this.state.markers.map(makeOverlay)}>
+        {this.state.markers.map(marker => (
+            <MapView.Marker
+              key={marker.id}>
+              // coordinate={[marker.latitude, marker.longitude]}>
+              <MapView.Callout>
+                <View>
+                </View>
+              </MapView.Callout>
+              </MapView.Marker>
+          ))}
+          </MapView>
+
     )
   },
   componentWillUnmount() {
