@@ -20,9 +20,7 @@ class TaskItem extends React.Component {
     var diffDays = parseInt((dueDate - now)/ 1000)
 
     return (
-      <View
-      // style={styles.allView}
-      >
+      <View style={styles.allView}>
         <TouchableHighlight
           underlayColor={'#1FBBFF'}
           onPress={this.props.onPress}

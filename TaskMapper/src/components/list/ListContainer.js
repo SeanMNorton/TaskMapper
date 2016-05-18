@@ -15,31 +15,16 @@ var TaskList = require('./TaskList')
 var styles = require('../../styles/styles')
 
 class ListContainer extends React.Component {
-  // componentDidMount() {
-  //   AsyncStorage.getItem("tasks")
-  //   .then((rawTasks) => JSON.parse(rawTasks))
-  //   .then((tasks) => {
-  //     for (var i in tasks) {
-  //       var due = tasks[i]['due']
-  //       tasks[i]['due'] = new Date(due)
-  //     }
-  //     this.setState({items: tasks})
-  //   })
-  // }
   componentDidMount() {
-    // AsyncStorage.clear()
     AsyncStorage.getItem("tasks")
-      .then( (itemsString) => {
-        if (itemsString) {
-          var itemsArray = JSON.parse(itemsString)
-          for (var i in itemsArray) {
-            var currentItem = itemsArray[i]
-            var due = currentItem.due
-            currentItem.due = new Date(due)
-          }
-          this.setState({items: itemsArray})
-        }
-      })
+    .then((rawTasks) => JSON.parse(rawTasks))
+    .then((tasks) => {
+      for (var i in tasks) {
+        var due = tasks[i]['due']
+        tasks[i]['due'] = new Date(due)
+      }
+      this.setState({items: tasks})
+    })
   }
   constructor() {
     super()
@@ -79,28 +64,23 @@ class ListContainer extends React.Component {
 
   updateItem(item, index) {
     AsyncStorage.getItem("currentSearch")
-      .then( (searchString) => {
-        var searchObject = JSON.parse(searchString)
-        var newItem = {}
-        for (var property in item) {
-          newItem[property] = item[property]
-        }
-        newItem.location = searchObject.location
-        newItem.name = searchObject.name
-        return newItem
-      }).then( (item) => {
-        var items = this.state.items
-        if (index) {
-          items[index] = item
-        } else {
-          item.set = new Date()
-          item.alerted = false
-          items.push(item)
-        }
-        this.setState({items: items})
-        AsyncStorage.setItem("tasks", JSON.stringify(this.state.items))
-        this.props.navigator.pop()
-      })
+    .then( (rawSearch) => JSON.parse(rawSearch) )
+    .then( (search) => {
+      item = JSON.parse(JSON.stringify(item)) // convert immutable struct to object
+      var items = this.state.items
+      item.name = search.name
+      item.location = search.location
+      if (index) {
+        items[index] = item
+      } else {
+        item.set = new Date()
+        item.alerted = false
+        items.push(item)
+      }
+      this.setState({items: items})
+      AsyncStorage.setItem("tasks", JSON.stringify(this.state.items))
+      this.props.navigator.pop()
+    } )
   }
 
  render() {

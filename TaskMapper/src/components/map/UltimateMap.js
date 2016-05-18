@@ -7,7 +7,6 @@ import {
   Text,
 } from 'react-native'
 
-
 var chicagoRegion = {
   latitude: 41.889357,
   longitude: -87.637604,
@@ -147,7 +146,7 @@ var UltimateMap = React.createClass({
       for (var i in this.state.markers) {
         var marker = this.state.markers[i]
         if ((!marker.alerted) && inCircle(self, marker)) {
-          AlertIOS.alert(marker.name)
+          AlertIOS.alert(marker.txt, marker.desc)
           marker.alerted = true
         } else {
           marker.alerted = false
@@ -181,13 +180,12 @@ var UltimateMap = React.createClass({
     })
   },
   render: function() {
-    // AsyncStorage.clear()
     return (
       <MapView style={{flex: 1}}
       region={this.state.region}
       showsUserLocation={true}
       annotations={this.state.markers.map(makeAnnotation)}
-      overlays={this.state.markers.map(makeOverlay)}/>
+      overlays={this.state.markers.map(makeOverlay)} />
     )
   },
   componentWillUnmount() {
