@@ -85,6 +85,7 @@ class ListContainer extends React.Component {
         return new Date(a.due) - new Date(b.due);
       })
       this.setState({items: items})
+      
 
       AsyncStorage.setItem("tasks", JSON.stringify(this.state.items))
       this.props.navigator.pop()
