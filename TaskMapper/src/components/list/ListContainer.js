@@ -74,6 +74,7 @@ class ListContainer extends React.Component {
         items[index] = item
       } else {
         item.set = new Date()
+        item.color = '#'+Math.floor(Math.random()*16777215).toString(16) // random color
         item.alerted = false
         items.push(item)
       }

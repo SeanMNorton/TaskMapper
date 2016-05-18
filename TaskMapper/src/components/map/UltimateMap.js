@@ -7,6 +7,8 @@ import {
   Text,
 } from 'react-native'
 
+import hslToRgb from '../common/colorConvert'
+
 var chicagoRegion = {
   latitude: 41.889357,
   longitude: -87.637604,
@@ -30,20 +32,22 @@ function circleCoords(cLat, cLong, rInMeters) {
 }
 
 function makeOverlay(marker) {
+  var currentTime = new Date().getTime()
+  var setTime = new Date(marker.set).getTime()
+  var dueTime = new Date(marker.due).getTime()
+  var fracThrough = (currentTime-setTime)/(dueTime-setTime)
+
   return {
-    coordinates: circleCoords(marker.latitude, marker.longitude, marker.radius),
-    strokeColor: marker.color,
+    coordinates: circleCoords(marker.latitude, marker.longitude, impendingRadius(fracThrough)),
+    strokeColor: impendingColor(fracThrough),
     lineWidth: 3,
   }
 }
 
 function makeAnnotation(marker) {
-  var dueDate = new Date(marker.due)
   var format = {month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'}
-  var title = marker.txt + " : " + dueDate.toLocaleDateString('en-US', format)
   return {
-    id: marker.id,
-    title: title,
+    title: marker.txt + " : " + new Date(marker.due).toLocaleDateString('en-US', format),
     latitude: marker.latitude,
     longitude: marker.longitude,
     tintColor: marker.color,
@@ -51,26 +55,20 @@ function makeAnnotation(marker) {
 }
 
 function makeMarker(task) {
-  var setTime = new Date(task.set).getTime()
-  var dueTime = new Date(task.due).getTime()
-  var currentTime = new Date().getTime()
-
-  var fracThrough = (currentTime-setTime)/(dueTime-setTime)
-
   return {
     txt: task.txt,
     desc: task.desc,
+    set: task.set,
     due: task.due,
     latitude: task.location.lat,
     longitude: task.location.lng,
-    radius: impendingRadius(fracThrough),
-    color: impendingColor(fracThrough),
+    color: task.color,
     alerted: task.alerted,
   }
 }
 
 function impendingRadius(x) {
-  if (x < 1) {
+  if (0 <= x && x < 1) {
     return 200/(1 - x)
   } else {
     return 0
@@ -78,35 +76,12 @@ function impendingRadius(x) {
 }
 
 function impendingColor(x) {
-  if (x < 1) {
+  if (0 <= x && x < 1) {
     var hue = (x/3)+(2/3)
   } else {
     var hue = 1
   }
-  var rgb = hslToRgb(hue, 1, .5);
-  return 'rgb(' + rgb[0] + ',' + rgb[1] + ',' + rgb[2] + ')';
-}
-
-function hslToRgb(h, s, l){
-    var r, g, b;
-    if(s == 0){
-        r = g = b = l; // achromatic
-    }else{
-        var hue2rgb = function hue2rgb(p, q, t){
-            if(t < 0) t += 1;
-            if(t > 1) t -= 1;
-            if(t < 1/6) return p + (q - p) * 6 * t;
-            if(t < 1/2) return q;
-            if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-            return p;
-        }
-        var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-        var p = 2 * l - q;
-        r = hue2rgb(p, q, h + 1/3);
-        g = hue2rgb(p, q, h);
-        b = hue2rgb(p, q, h - 1/3);
-    }
-    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+  return hslToRgb(hue, 1, .5)
 }
 
 function inCircle(self, marker) {
@@ -138,7 +113,7 @@ var UltimateMap = React.createClass({
       .then( (tasks) => {
         this.setState({markers: tasks.map(makeMarker)})
       })
-    }, 16)
+    }, 1000/60)
 
     setInterval(() => {
       var self = this.state.myPosition
