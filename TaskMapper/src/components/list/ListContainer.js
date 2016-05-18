@@ -79,8 +79,11 @@ class ListContainer extends React.Component {
         item.color = hslToRgb(Math.random(), 1, 0.5) //'#'+Math.floor(Math.random()*16777215).toString(16) // random color
         items.push(item)
       }
+      items.sort(function(a,b){
+        return new Date(a.due) - new Date(b.due);
+      })
       this.setState({items: items})
-      
+
       AsyncStorage.setItem("tasks", JSON.stringify(this.state.items))
       this.props.navigator.pop()
     } )
