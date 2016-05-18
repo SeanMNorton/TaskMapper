@@ -66,7 +66,7 @@ class ListContainer extends React.Component {
     var items = this.state.items
     items.splice(index, 1)
     this.setState({items: items})
-    AsyncStorage.setItem("items", JSON.stringify(this.state.items))
+    AsyncStorage.setItem("tasks", JSON.stringify(this.state.items))
   }
 
   openItem(rowData, rowID) {
@@ -94,6 +94,7 @@ class ListContainer extends React.Component {
           items[index] = item
         } else {
           item.set = new Date()
+          item.alerted = false
           items.push(item)
         }
         this.setState({items: items})
