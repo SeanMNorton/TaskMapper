@@ -12,7 +12,7 @@ var chicagoRegion = {
   latitude: 41.889357,
   longitude: -87.637604,
   latitudeDelta: 0.0922,
-  longitudeDelta: .09,
+  longitudeDelta: 0.09,
 }
 
 function circleCoords(cLat, cLong, rInMeters) {
