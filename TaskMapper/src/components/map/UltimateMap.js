@@ -16,29 +16,40 @@ var chicagoRegion = {
   longitudeDelta: 0.09,
 }
 
-function circleCoords(cLat, cLong, rInMeters) {
-  if (rInMeters === 0) {
-    return []
+function inclusiveRange(low, high) {
+  var arr = [];
+  while (low <= high) {
+    arr.push(low++);
   }
-  var coords = []
-  var tau = 2*Math.PI
-  var rLat = rInMeters/111111.1
-  var rLong = rInMeters/(111111.1 * Math.cos(cLat*tau/360))
+  return arr
+}
+
+function circleCoords(cLat, cLng, rInMeters) {
+  var tau = 2 * Math.PI
+  var cos = Math.cos
+  var sin = Math.sin
+
+  var rLat = rInMeters/( 111111.1 )
+  var rLng = rInMeters/( 111111.1 * cos(cLat * tau/360) )
 
   var n = 6 // "circle" = n-sided polygon
-  for (var i = 0; i <= n; i++) {
-    var lat = cLat + rLat * Math.cos(tau*i/n)
-    var long = cLong + rLong * Math.sin(tau*i/n)
-    coords.push({latitude: lat, longitude: long})
-  }
-  return coords
+  return inclusiveRange(0, n).map(function(i) {
+    return {
+       latitude: cLat + rLat * cos(tau * i/n),
+      longitude: cLng + rLng * sin(tau * i/n),
+    }
+  })
 }
 
 function makeOverlay(marker) {
-  return {
-    coordinates: circleCoords(marker.latitude, marker.longitude, marker.radius),
-    strokeColor: marker.color, // impendingColor(fracThrough),
-    lineWidth: 3,
+  if (marker.radius === 0) {
+    return {}
+  } else {
+    return {
+      coordinates: circleCoords(marker.latitude, marker.longitude, marker.radius),
+      strokeColor: marker.color, // impendingColor(fracThrough),
+      lineWidth: 3,
+    }
   }
 }
 
@@ -77,28 +88,24 @@ function impendingRadius(x) {
   }
 }
 
-function impendingColor(x) {
-  if (0 <= x && x < 1) {
-    var hue = (x/3)+(2/3)
-  } else {
-    var hue = 1
-  }
-  return hslToRgb(hue, 1, 0.5)
-}
+// function impendingColor(x) {
+//   if (0 <= x && x < 1) {
+//     var hue = (x/3)+(2/3)
+//   } else {
+//     var hue = 1
+//   }
+//   return hslToRgb(hue, 1, 0.5)
+// }
 
 function inCircle(self, marker) {
-  console.log(self)
-  console.log(marker)
-  if (marker.radius === 0) {
-    return false
-  }
   var tau = 2 * Math.PI
+  var cos = Math.cos
   var avgY = (self.latitude + marker.latitude)/2
 
-  var yDist = (self.latitude - marker.latitude)*111111.1
-  var xDist = (self.longitude - marker.longitude)*(111111.1 * Math.cos(avgY*tau/360))
+  var yDist = ( self.latitude -  marker.latitude) * ( 111111.1 )
+  var xDist = (self.longitude - marker.longitude) * ( 111111.1 * cos(avgY*tau/360) )
 
-  var dist = Math.sqrt( Math.pow(xDist, 2) + Math.pow(yDist, 2) )
+  var dist = Math.sqrt( xDist*xDist + yDist*yDist )
   return (dist < marker.radius)
 }
 
@@ -154,11 +161,11 @@ var UltimateMap = React.createClass({
       var self = this.state.myPosition
       for (var i in this.state.markers) {
         var marker = this.state.markers[i]
-        if (inCircle(self, marker)) {
+        if (marker.radius > 0 && inCircle(self, marker)) {
           this.alertMenu(marker)
         }
       }
-    }, 1000)
+    }, 1000*10)
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
