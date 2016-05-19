@@ -21,16 +21,18 @@ class TaskItem extends React.Component {
     var thisThang = moment(dueDate).format('lll')
 
     return (
-      <View style={styles.allView}>
+      <View style={styles.shadow} >
         <TouchableHighlight
-          underlayColor={'#1FBBFF'}
+
+          underlayColor={'#E4ECF0'}
           onPress={this.props.onPress}
           onLongPress={this.props.onLongPress}>
-          <View style={[styles.listItem, {justifyContent: 'flex-start'}]}>
-            <Text style={[ styles.txt, item.complete && styles.completed]}>
+          <View style={[styles.listItem,{justifyContent: 'flex-start'}]}>
+            <Text style={styles.txt}>
               {item.txt}
               </Text>
-              <Text style={{fontSize: 14, paddingLeft: 15, paddingBottom: 5}}> Due: {thisThang}</Text>
+              <Text style={[{ color: this.props.item.color,}, styles.honeycomb]}>O</Text>
+              <Text style={{fontSize: 14, paddingLeft: 12, paddingBottom: 5}}> Due: {thisThang}</Text>
 
           </View>
         </TouchableHighlight>

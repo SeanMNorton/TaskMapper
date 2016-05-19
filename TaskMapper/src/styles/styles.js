@@ -29,14 +29,27 @@ var styles = StyleSheet.create({
     fontSize: 30,
   },
   listItem: {
-    borderBottomColor: '#1E3A47',
+    borderBottomColor: 'rgba(30,58,71,.3)',
     borderBottomWidth: 1,
+
     flex:1,
+  },
+  shadow: {
+    marginBottom: 5,
+    shadowColor: 'rgba(30,58,71,.7)',
+    shadowOpacity: .3,
+    shadowRadius: 1,
+    shadowOffset: {
+      height: 3,
+      width: 0,
+    }
   },
   txt: {
     color: '#1E3A47',
     fontWeight: '700',
-    padding: 15,
+    paddingLeft: 15,
+    paddingTop: 10,
+    paddingBottom: 3,
     fontSize: 17,
   },
   map: {
@@ -49,8 +62,16 @@ var styles = StyleSheet.create({
     backgroundColor: '#1E3A47',
     marginTop: 0,
     padding: 0,
-
     flex: 1,
+  },
+  honeycomb: {
+    fontFamily: 'HONEYCOMBED',
+    fontWeight: 'bold',
+    marginLeft: 350,
+    position: 'absolute',
+    bottom: 17,
+    transform: [{rotate: '90deg'}]
+
   },
   buttonText: {
     color: 'white',
@@ -74,7 +95,6 @@ var styles = StyleSheet.create({
   },
   listView: {
     flex: 9,
-
   },
 })
 
