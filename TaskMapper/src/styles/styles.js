@@ -64,6 +64,15 @@ var styles = StyleSheet.create({
     padding: 0,
     flex: 1,
   },
+  honeycomb: {
+    fontFamily: 'HONEYCOMBED',
+    fontWeight: 'bold',
+    marginLeft: 350,
+    position: 'absolute',
+    bottom: 17,
+    transform: [{rotate: '90deg'}]
+
+  },
   buttonText: {
     color: 'white',
     padding: 0,
