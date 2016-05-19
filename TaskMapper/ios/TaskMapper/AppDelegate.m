@@ -47,7 +47,7 @@
                                                       moduleName:@"TaskMapper"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
-rootView.backgroundColor = [UIColor colorWithRed:0.118 green:0.227 blue:0.278 alpha:1];
+rootView.backgroundColor = [UIColor colorWithRed:1 green:0.227 blue:0.255 alpha:1];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
