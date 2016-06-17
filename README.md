@@ -5,18 +5,25 @@ TaskMapper is a single user real-time platform for individuals to set a task wit
 [Video](http://bit.ly/TaskMapperVid)
 
 ## Technologies
+
 React Native v0.25
+
 Xcode v7+
 
 ## Installation
 npm install react-native-google-places-autocomplete
+
 npm install react-native-vector-icons --save
+
 npm install link
 
 ## To Run
 npm install
+
 open ios/TaskMapper.xcodeproj
+
 Hit 'play' in Xcode on iPhone 6
+
 (Set current location in Xcode > debug > simulate location > DBC)
 
 ## Credits
